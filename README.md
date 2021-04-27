@@ -30,6 +30,10 @@ Instructios will guide to setup working environment for development and testing 
 
 1.  Initially you should have administrator privileges, to setup the environment
 
+2.  Install a web server on your development environment, and then install PHP and MySQL
+
+3. Configure your server to deploy PHP files. Create your .php files, place them in your web directory, and    the server will automatically parse them for you.
+
 ##  Deployment
 
 1.  Clone the github repository
