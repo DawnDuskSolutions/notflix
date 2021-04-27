@@ -30,10 +30,9 @@ $dlmtr1 = "||";
 $dlmtr2 = "|";
 $dlmtr3 = "~";
 
-//$itemImgPrefix = "IMG";
-
-//$trckSrcDir = "notflix/src/php/videosrc/";
 $trckSrcDir = "src/php/videosrc/";
+
+$tranlogfile = "tracktran.txt";
 
 $defaultPwd = "1234";
 

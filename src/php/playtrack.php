@@ -13,15 +13,13 @@ div#video_controls_bar{ background: #333; padding:10px; color:#CCC;display:none;
 <?php
 include 'connsrvr.php';
 
-$phpCntxtVal1 = $_GET['cntxtVal1'];
-$phpCntxtVal2 = $_GET['cntxtVal2'];
+$phpCntxtVal = $_GET['cntxtVal'];
 
 //$test = $_GET['test'];
 
-//echo $phpCntxtVal1 ."<br><br>";
-//echo $phpCntxtVal2 ."<br><br>";
+//echo $phpCntxtVal ."<br><br>";
 
-$tmpArr = explode($dlmtr1,$phpCntxtVal1);
+$tmpArr = explode($dlmtr1,$phpCntxtVal);
 
 $trckArr = explode($dlmtr2,$tmpArr[0]);
 $usrArr = explode($dlmtr2,$tmpArr[1]);
@@ -72,21 +70,49 @@ echo "<br><br>" .$UsrName ."<br><br>";
 echo "<br><br>" .$tranArr[0] ."<br><br>";
 echo "<br><br>" .$tranArr[1] ."<br><br>";
 */
-if ($phpCntxtVal2 == "NA") {
+
+$tracktranArr = [];
+//echo "testing<br>";
+
+//$filename = '/path/to/foo.txt';
+
+if (file_exists($tranlogfile)) {
+    //echo "The file $tranlogfile exists";
+
+    //Retrieve the serialized string from file.
+   $fileContents = file_get_contents($tranlogfile);
+
+   //Unserialize the string back into an array.
+   $tracktranArr = unserialize($fileContents);
+
+   //End result.
+   //var_dump($tracktranArr);
+
+   if (unlink($GLOBALS['tranlogfile'])) {
+	//echo "delete file successful";
+   } else {
+  	//echo "delete file unsuccessful";
+   }
+} else {
+    //echo "The file $tranlogfile does not exist";
+}
+
+$cnt = count($tracktranArr);
+$tmpArr = "";
+$arr = "";
+$rowID = 0;
+
+if ($cnt == 0) { 
 //skip
 } else {
-    $tmpTranArr = explode("||",$phpCntxtVal2);
-    $tranArr = "";
-    $rowID = 0;
-
-    $cnt = count($tmpTranArr);
-    //echo $cnt;
+    //echo var_dump($tracktranArr) . "<br>";
 
     echo "<table style='display:none;'>";
 
     for ($i=0;$i<$cnt;$i++) {
+	$tmpArr = $tracktranArr[$i];
 
-        $tranArr = explode($dlmtr2,$tmpTranArr[$i]);
+        $tranArr = explode($dlmtr2,$tmpArr);
 
         $arr = explode($dlmtr3,$tranArr[0]);
         $tranID = $arr[1];
@@ -97,6 +123,7 @@ if ($phpCntxtVal2 == "NA") {
         $arr = explode($dlmtr3,$tranArr[2]);
         $tranCurrTime = $arr[1];
 
+/*
         if ($TrackID == $tranTrckID) {
             $timeArr = explode("/",$tranCurrTime);
 	    $currTimeVal = $timeArr[0];
@@ -104,6 +131,7 @@ if ($phpCntxtVal2 == "NA") {
 	} else {
 	    //skip
 	}
+*/
 
 	$rowID = $rowID+1;
 
@@ -125,7 +153,6 @@ if ($phpCntxtVal2 == "NA") {
             $currTimeVal = $timeArr[0];
             $durTimeVal = $timeArr[1];
 	} else {
-
             echo "<tr>";
 
 	    echo "<td>" .$rowID ."</td>";
@@ -139,12 +166,11 @@ if ($phpCntxtVal2 == "NA") {
             echo "<td>" .$tranCurrTime ."</td>";
 
 	    echo "</tr>";
-
 	}
-    } //for loop
-
+    }
     echo "</table>";
 }
+
 /*
 echo "<br><br>" .$TrackID ."<br><br>";
 

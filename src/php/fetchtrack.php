@@ -7,8 +7,6 @@ $tmpVal = explode($dlmtr2,$phpUsrInfo);
 $txtUsrID = $tmpVal[0];
 $txtUsrName = $tmpVal[1];
 
-$tranCntxtVal = "";
-
 $cntxtVal = "";
 
 //echo "testing";
@@ -42,9 +40,9 @@ echo "<br><br>";
 
 function fetchTrackTranData($srvrConn,$srchUsrID) {
 
-$txtTranID = "";
-$txtTranCurrTime = "";
 $valX = "";
+$currIndx = 0;
+$txtTranArr = [];
 
 $tsql = "SELECT TranID, TrackID ,InteractionPoint As TrackCurrTime FROM " .$GLOBALS['tmpdbName'] ." WHERE " .$GLOBALS['srchCol1'] ;
 $tsql = $tsql ." IN (SELECT max(TranID) FROM ".$GLOBALS['tmpdbName'] ." where " .$GLOBALS['srchCol2'] ." = '" .$srchUsrID ."' GROUP BY UserAcctID, TrackID)";
@@ -59,24 +57,24 @@ if (mysqli_num_rows($resultSet) > 0) {
 
 while($row = mysqli_fetch_assoc($resultSet)) {
 
-$txtTranID = $row['TranID'];
-$txtTrckCurrTime = $row['TrackCurrTime'];
+$txtTranArr[$currIndx] = "tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
 
-if ($valX == "") {
-$valX = "tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
-} else {
-$valX = $valX ."||" ."tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
-}
+//echo $txtTranArr[$currIndx] ."<br<br>";
+
+$currIndx = $currIndx + 1;
 
 } //end while
 
 //echo $valX;
 
-$GLOBALS['tranCntxtVal'] = $valX;
+//serialize the array and store in a file
+$serialized = serialize($txtTranArr);
+
+//Save the serialized array to a text file.
+file_put_contents($GLOBALS['tranlogfile'], $serialized);
 
 } else {
 //echo "Query fetched 0 rows <br>";
-$GLOBALS['tranCntxtVal'] = "NA";
 }
 
 mysqli_free_result($resultSet);
@@ -207,12 +205,9 @@ $GLOBALS['cntxtVal'] = "trckid~" .$trckID ."|trcktitle~" .$trckname ."|trcksrc~"
 $GLOBALS['cntxtVal'] = $GLOBALS['cntxtVal'] ."txtUsrID~" .$GLOBALS['txtUsrID'] ."|txtUsrName~" .$GLOBALS['txtUsrName'];
 
 //echo $GLOBALS['cntxtVal'] ."<br><br>";
-//echo $GLOBALS['tranCntxtVal'] ."<br><br>";
 
 //echo "<a id=" .$colName ." href=playtrack.php?cntxtVal=" .$GLOBALS['cntxtVal'] ."&test=Hello" .">Click here to play video</a>";
-//echo "<a id=" .$colName ." href=playtrack.php?cntxtVal=" .$GLOBALS['cntxtVal'] .">Click here to play video</a>";
-
-echo "<a id=" .$colName ." href=playtrack.php?cntxtVal1=" .$GLOBALS['cntxtVal'] ."&cntxtVal2=" .$GLOBALS['tranCntxtVal'] .">Click here to play video</a>";
+echo "<a id=" .$colName ." href=playtrack.php?cntxtVal=" .$GLOBALS['cntxtVal'] .">Click here to play video</a>";
 
 } //while row
 
@@ -235,6 +230,4 @@ funcFetchTrackData($conn);
 mysqli_close($conn);
 
 //echo $GLOBALS['cntxtVal'] ."<br><br>";
-
-//echo $GLOBALS['tranCntxtVal'] ."<br><br>";
 ?>

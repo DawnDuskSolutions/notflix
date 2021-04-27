@@ -3,6 +3,7 @@
 
 <?php
 include 'connsrvr.php';
+include 'vars.php';
 
 $txtTranID = "";
 $txtTranCurrTime = "";
@@ -127,12 +128,10 @@ echo "<br><br>";
 */
 
 
-//$txtTranID = "";
-//$txtTrckCurrTime = "";
-$trckCntxtVal = "";;
-
 function fetchTrackTranData($srvrConn,$srchUsrID,$srchTrckID) {
 $valX = "";
+$currIndx = 0;
+$txtTranArr = [];
 
 $tsql = "SELECT TranID, TrackID, InteractionPoint As TrackCurrTime FROM " .$GLOBALS['tmpdbName'] ." WHERE " .$GLOBALS['srchCol1'] ;
 $tsql = $tsql ." IN (SELECT max(TranID) FROM ".$GLOBALS['tmpdbName'] ." where " .$GLOBALS['srchCol2'] ." = '" .$srchUsrID ."' AND " .$GLOBALS['srchCol3'] ." = '" .$srchTrckID ."' GROUP BY UserAcctID, TrackID)";
@@ -147,20 +146,23 @@ if (mysqli_num_rows($resultSet) > 0) {
 
 while($row = mysqli_fetch_assoc($resultSet)) {
 
-if ($valX == "") {
-$valX = "tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
-} else {
-$valX = $valX ."##" ."tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
-}
+$txtTranArr[$currIndx] = "tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
+
+//echo $txtTranArr[$currIndx] ."<br<br>";
+
+$currIndx = $currIndx + 1;
 
 } //end while
 
-//echo = $valX;
+//serialize the array and store in a file
+$serialized = serialize($txtTranArr);
 
-$GLOBALS['trckCntxtVal'] = $valX;
+//Save the serialized array to a text file.
+file_put_contents($GLOBALS['tranlogfile'], $serialized);
+
+//echo = $valX;
 } else {
 //echo "<br> Query fetched 0 rows <br>";
-$GLOBALS['trckCntxtVal'] = "NA";
 }
 mysqli_free_result($resultSet);
 } // end func
@@ -182,7 +184,6 @@ $cntxtVal = $cntxtVal ."txtUsrID~" .$usrID ."|" ."txtUsrName~" .$usrName;
 
 //echo $cntxtVal ."<br><br>";
 
-//echo $trckCntxtVal ."<br><br>";
 ?>
 
 <script>
@@ -199,8 +200,7 @@ $cntxtVal = $cntxtVal ."txtUsrID~" .$usrID ."|" ."txtUsrName~" .$usrName;
 //var urlPath = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
 var urlPath = sessionStorage.siteDomainName;
 //document.write(urlPath + "<br><br>");
-
-var urlFile = "src/php/playtrack.php?cntxtVal1=" + '<?php echo $cntxtVal ?>' + "&cntxtVal2=" + '<?php echo $trckCntxtVal ?>';
+var urlFile = "src/php/playtrack.php?cntxtVal=" + '<?php echo $cntxtVal ?>';
 //document.write(urlFile + "<br><br>");
 //var hrefVal = urlPath + "/" + urlFile;
 
