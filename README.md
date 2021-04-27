@@ -34,6 +34,8 @@ Instructios will guide to setup working environment for development and testing 
 
 3. Configure your server to deploy PHP files. Create your .php files, place them in your web directory, and    the server will automatically parse them for you.
 
+4. Setup your database configurations and connect to the database for storing information.
+
 ##  Deployment
 
 1.  Clone the github repository
