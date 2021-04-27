@@ -117,13 +117,13 @@ function bindRegisterFrmCtrls(mnuVal,usrMaxID,logMaxID) {
         }
     }
 
-	frmX = document.createElement("form");
-	frmX.setAttribute("id","frmAcct");
-	frmX.setAttribute("name","frmAcct");
-	frmX.setAttribute("style","width:100%;padding:10px;text-align:left;");
-	frmX.setAttribute("method","POST");
-	//frmX.setAttribute("style","background:pink;");
-	frmX.setAttribute("action","postdata.php");
+    frmX = document.createElement("form");
+    frmX.setAttribute("id","frmAcct");
+    frmX.setAttribute("name","frmAcct");
+    frmX.setAttribute("style","width:100%;padding:10px;text-align:left;");
+    frmX.setAttribute("method","POST");
+    //frmX.setAttribute("style","background:pink;");
+    frmX.setAttribute("action","postdata.php");
 
 	var tblX = "";
 	tblX = document.createElement("table");

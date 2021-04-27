@@ -77,10 +77,8 @@ echo "<br>";
 */
 
 $dbArr = "";
-//$dbArr = explode("|", $tempArr[0]);
 $dbArr = explode($dlmtr2, $tempArr[0]);
 $colArr = "";
-//$colArr = explode("|", $tempArr[1]);
 $colArr = explode($dlmtr2, $tempArr[1]);
 
 $tblCaption = "";
@@ -118,7 +116,7 @@ $tsql = "Select * from " .$GLOBALS['dbName'];
 //$stmt = sqlsrv_query($srvrConn, $tsql);
 
 $result = fetchEntityResultSet($srvrConn,$tsql);
-
+if (mysqli_num_rows($result) > 0) {
 //echo $tsql;
 //echo "<br>";
 //echo $GLOBALS['colArr'][0];
@@ -148,7 +146,6 @@ $x = $x + 1;
 
 echo "</tr>";
 
-if (mysqli_num_rows($result) > 0) {
 while($row = mysqli_fetch_assoc($result)) 
 {
 $rowIndx = ($rowIndx + 1);
@@ -292,9 +289,12 @@ echo "<center style='padding-top:20px;'> <button id=btnNew onclick=showPopupFrm(
 } else {
 //skip
 }
+
 } else {
-	echo "Query fetched 0 rows <br>";
+//	echo "Query fetched 0 rows <br>";
 } // if num of rows > 0
+
+
 mysqli_free_result($result);
 } // end func
 

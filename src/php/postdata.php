@@ -10,6 +10,63 @@
 include 'connsrvr.php';
 $mnuInfo = "";
 
+function fetchEntityMaxVal($srvrConn,$txtVal) {
+//$tempArr = "";
+//echo $txtVal;
+//echo "<br>";
+
+switch ($txtVal) {
+  case "useracct":
+       $tempArr = explode($GLOBALS['dlmtr1'], $GLOBALS['userCrdn']);
+       $dbArr = explode($GLOBALS['dlmtr2'], $tempArr[0]);
+       break;
+  case "videotrack":
+       $tempArr = explode($GLOBALS['dlmtr1'], $GLOBALS['trackCrdn']);
+       $dbArr = explode($GLOBALS['dlmtr2'], $tempArr[0]);
+       break;
+  case "tracksrclog":
+       $dbArr = explode($GLOBALS['dlmtr2'], $GLOBALS['trckSrcDB']);
+       break;
+  case "auditlog":
+       $dbArr = explode($GLOBALS['dlmtr2'], $GLOBALS['auditDB']);
+       break;
+  default:
+    echo "Select a valid DB table" .$txtVal;
+}
+
+$dbX = "";
+$autoGenKeyCol = "";
+$keyCol = "";
+$keyPrefix = "";
+
+if ($txtVal == "useracct" || $txtVal == "videotrack") {
+$dbX = $dbArr[1];
+$autoGenKeyCol = $dbArr[2];
+$keyCol = $dbArr[3]; 
+$keyPrefix = $dbArr[4];
+} else if ($txtVal == "tracksrclog" || $txtVal == "auditlog") {
+$dbX = $dbArr[0];
+$autoGenKeyCol = $dbArr[1];
+$keyCol = $dbArr[2]; 
+$keyPrefix = $dbArr[3];
+}
+
+//echo "<br><br>";
+$tsql1 = "SELECT COALESCE(MAX(" .$autoGenKeyCol ."),0) as " .$autoGenKeyCol ." FROM " .$dbX;
+//echo $tsql1;
+$tmpMaxVal = fetchEntityMAXIDQuery($srvrConn,$tsql1,$autoGenKeyCol);
+//autogenkeycol and prefix concat
+if ($txtVal == "tracksrclog") {
+$maxVal = generateMAXID($keyPrefix,$tmpMaxVal,"yes","yes");
+} else {
+$maxVal = generateMAXID($keyPrefix,$tmpMaxVal,"yes","NA");
+}
+//echo "MAX - Code - " .$dbX .":" .$maxVal;
+
+return $maxVal;
+
+}
+
 function funcBindInsertStmt($srvrConn) {
 //if ($_SERVER["REQUEST_METHOD"] == "POST") {
 //echo "Testing post method <br>";
@@ -76,11 +133,16 @@ if ($dbName == "auditlog" && $tranMode == "Delete") {
 //skip insertion of audit log
 } else {
 //'" .$GLOBALS['auditIDPrefix'] ."
-//$testSQL = "INSERT INTO JWLAudit (auditPrefix,dbInfo,keyInfo,updateInfo,auditDate) VALUES ('" .$GLOBALS['auditIDPrefix'] ."','" .$dbVal ."','" .$keyVal ."','" .$rsnVal1 ."','" .$dateVal ."')";
+
+$dbX = "auditlog";
+$auditID = fetchEntityMaxVal($srvrConn,$dbX);
+
 $testSQL = "INSERT INTO auditlog (AuditLogID,DBInfo,KeyColInfo,LogMessage,LogDate) VALUES ";
-$testSQL = $testSQL ."('" .$idVal ."','" .$dbVal ."','" .$keyVal ."','" .$rsnVal1 ."','" .$dateVal ."')";
+$testSQL = $testSQL ."('" .$auditID ."','" .$dbVal ."','" .$keyVal ."','" .$rsnVal1 ."','" .$dateVal ."')";
+
 //echo $testSQL;
 //echo "<br><br>";
+
 funcEntityInsertQuery($srvrConn,$testSQL);
 }
 
@@ -162,6 +224,8 @@ $arr = "";
 //$arr = explode($GLOBALS['dlmtr1'],$updateVal);
 $arr = explode($GLOBALS['dlmtr1'],$rsnVal2);
 
+$currDBMaxVal = fetchEntityMaxVal($srvrConn,$dbName);
+
 $sqlVal = "INSERT INTO " .$dbName ." (";
 
 $cnt = count($arr);
@@ -229,6 +293,10 @@ echo "<br><br>";
 echo $valArr[2];
 echo "<br><br>";
 */
+
+if ($valArr[0] == "UserAcctID" || $valArr[0] == "TrackID") {
+$valArr[2] = $currDBMaxVal;
+}
 
 if ($valArr[0] == "UserPwd") {
 $hash = base64_encode ($valArr[2]);
@@ -391,6 +459,7 @@ if ($uploadOk == 0) {
   }
 }
 
+if ($uploadOk = 1) {
 $fileExtVal = get_extension($target_file);
 $fileNameVal = $trckName ."." .$fileExtVal;
 $destSrc = $target_dir .$fileNameVal;
@@ -403,10 +472,15 @@ echo "<br><br>";
 rename($target_file,$destSrc);
 
 appendStckImgAudit($srvrConn,$trckName,$trckID,$trckFrmSrc,$trckDstSrc,$rsnVal);
+} else {
+exit();
+}
 } // end func
 
 function get_extension($file) {
- $extension = end(explode(".", $file));
+ //extension = end(explode(".", $file));
+ $tmp = explode('.', $file);
+ $extension = end($tmp);
  return $extension ? $extension : false;
 }
 
@@ -419,9 +493,15 @@ $trckDate = getCurrDateString();
 //echo $imgSrcPath ."<br><br>";
 //echo $imgDate ."<br><br>";
 
-//$stmtSQL = "INSERT INTO tracksrclog (TrackSrcID,TrackID,TrackFromSrcPath,TrackDestSrcPath,Reason,UpdateDate) VALUES ('" .$trckName ."','" .$trckID ."','" .$trckFrmSrc ."','" .$trckDstSrc ."','" .$rsnVal ."','" .$trckDate ."')";
+$dbX = "tracksrclog";
+$trckSrcID = fetchEntityMaxVal($srvrConn,$dbX);
+
+//$stmtSQL = "INSERT INTO tracksrclog (TrackSrcID,TrackID,TrackFromSrcPath,TrackDestSrcPath,Reason,UpdateDate) VALUES ";
+//$stmtSQL = $stmtSQL ."('" .$trckName ."','" .$trckID ."','" .$trckFrmSrc ."','" .$trckDstSrc ."','" .$rsnVal ."','" .$trckDate ."')";
+
 $stmtSQL = "INSERT INTO tracksrclog (TrackSrcID,TrackID,TrackFromSrcPath,TrackDestSrcPath,Reason,UpdateDate) VALUES ";
-$stmtSQL = $stmtSQL ."('" .$trckName ."','" .$trckID ."','" .$trckFrmSrc ."','" .$trckDstSrc ."','" .$rsnVal ."','" .$trckDate ."')";
+$stmtSQL = $stmtSQL ."('" .$trckSrcID ."','" .$trckID ."','" .$trckFrmSrc ."','" .$trckDstSrc ."','" .$rsnVal ."','" .$trckDate ."')";
+
 /*
 echo "<br><br>";
 echo "SQL stmt : " .$stmtSQL;

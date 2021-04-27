@@ -123,11 +123,11 @@ function exportData() {
 function validateFrmData(dbX,strMode,tblX,indxVal) {
 validFrm = "yes";
 editedFrm = "no";
-
+//alert(strMode);
     validate : {
         var rowData = tblX.rows[indxVal].cells;
 
-        if (dbX == "UserAcct") {
+        if (dbX == "useracct") {
 
             if (strMode == "Append") {
                 tempY = document.getElementById(dbX + "UserName");
@@ -138,6 +138,29 @@ editedFrm = "no";
                 } else {
                     //skip
                 }
+
+	        //validate password
+    	        var txtPwdX = document.getElementById(dbX + "UserPwd");
+    	        if (chkValidPassword(txtPwdX,true) == false) {
+                    validFrm = "no";
+                    break validate;
+	        }
+
+    	        //validate password
+	        var txtPwdY = document.getElementById("txtNewPwd");
+	        if (chkValidPassword(txtPwdY,true) == false) {
+                    validFrm = "no";
+                    break validate;
+                }
+
+                if (txtPwdX.value == txtPwdY.value) {
+	            //skip
+                } else {
+                    alert("Confirm password and New password should be same");
+                    txtPwdY.focus();
+                    validFrm = "no";
+                    break validate;
+	        }
             }
 
             var strName = dbX + "LastName" + indxVal + "-oldval";
@@ -299,7 +322,9 @@ var strFrm = "";
 } // end func
 
 function showAppendnEditPopupDiv(tranMode,dbX,tblX,indxVal,divY) {
+
 var rowData = tblX.rows[indxVal].cells;
+
 //alert(tblX.rows[indxVal].innerHTML);
 
 var hdrX = document.getElementById("hdrID");
@@ -325,6 +350,10 @@ var colCnt = hdrX.childNodes.length;
 
 for (var i=0;i<colCnt;i++) {
 
+    colName = "";
+    colName = hdrX.childNodes[i].id;
+    //alert(colName);
+
     rowX = "";
     rowX = document.createElement("tr");
 
@@ -342,13 +371,34 @@ for (var i=0;i<colCnt;i++) {
     colX.appendChild(elmntX);
     rowX.appendChild(colX);
 
+    if (colName == 'UserPwd' && tranMode == "append") {
+    	//elmntX = "";
+    	elmntX = document.createElement("br");
+    	colX.appendChild(elmntX);
+
+    	elmntX = document.createElement("br");
+    	colX.appendChild(elmntX);
+
+    	elmntX = document.createElement("br");
+    	colX.appendChild(elmntX);
+
+    	elmntX = "";
+    	elmntX = document.createElement("label");
+    	elmntX.setAttribute("id","lblNewPwd");
+    	elmntX.innerHTML = "Confirm password";
+
+    	colX.appendChild(elmntX);
+    	rowX.appendChild(colX);
+    } 
+
     colX = "";
     colX = document.createElement("td");
 
+/*
     colName = "";
     colName = hdrX.childNodes[i].id;
     //alert(colName);
-
+*/
     valX = "";
     if (tranMode == 'edit') {
         var tagVal = rowData[i].childNodes[0].tagName.toLowerCase();
@@ -420,7 +470,11 @@ for (var i=0;i<colCnt;i++) {
 
     if (tranMode == "append") {
         if (isEditable == "readonly") {
-            elmntX.setAttribute("readonly","readonly");
+	    if (colName == 'UserPwd' && tranMode == "append") {
+	        elmntX.style.background = "#e6f5ff";
+	    } else {
+                elmntX.setAttribute("readonly","readonly");                
+	    }
         } else {
             elmntX.style.background = "#e6f5ff";
         }
@@ -435,7 +489,22 @@ for (var i=0;i<colCnt;i++) {
     if (tranMode == "append" && colName == 'TrackSrc') {
         elmntX.style.display="none";
     }
+    colX.appendChild(elmntX);
 
+    if (colName == 'UserPwd' && tranMode == "append") {
+        elmntX = document.createElement("br");
+	colX.appendChild(elmntX);
+
+	elmntX = document.createElement("br");
+	colX.appendChild(elmntX);
+
+	elmntX = document.createElement("input");
+	elmntX.setAttribute("id","txtNewPwd");
+	elmntX.setAttribute("type","password");
+	//elmntX.setAttribute("placeholder","Confirm password");
+	elmntX.setAttribute("value","");
+	elmntX.style.background = "#e6f5ff";
+    }
     colX.appendChild(elmntX);
 
     if (colName == 'TrackSrc') {

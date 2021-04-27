@@ -34,20 +34,20 @@ $trckSrcDir = "src/php/videosrc/";
 
 $tranlogfile = "tracktran.txt";
 
-$defaultPwd = "1234";
+//$defaultPwd = "1234";
 
 $validMnuNav = "yes";
 
 //Customer table credentials
 $trckSrcDB = "tracksrclog|SrcID|TrackSrcID|SRC";
 
-$auditDB = "AuditLog|LogID|AuditLogID|LOG";
+$auditDB = "auditlog|LogID|AuditLogID|LOG";
 
 $loginCrdn = "UserAcct|UserName|UserPwd|UserAdmin";
 
-//$userCrdn = "Member|UserAcct|UserAcctID|USR|AppendnEditnDelete||AccountID~UserAcctID~readonly~NA|FirstName~UserName~disable~NA|LastName~LastName~enable~NA|Password~UserPwd~enable~NA|Email~UserEmail~enable~NA|Phone~UserPhone~enable~NA|RegiteredDate~RegisterDate~readonly~currdate|ExpiryDate~ExpiryDate~readonly~NA|Roles~UserAdmin~readonly~user";
+//$userCrdn = "Member|useracct|UserID|UserAcctID|USR|AppendnEditnDelete||AccountID~UserAcctID~readonly~NA|FirstName~UserName~disable~NA|LastName~LastName~enable~NA|Password~UserPwd~readonly~" .$defaultPwd ."|Email~UserEmail~enable~NA|Phone~UserPhone~enable~NA|RegiteredDate~RegisterDate~readonly~" .$srvrDate ."|ExpiryDate~ExpiryDate~readonly~" .$expiryDate ."|Roles~UserAdmin~readonly~user";
 
-$userCrdn = "Member|UserAcct|UserID|UserAcctID|USR|AppendnEditnDelete||AccountID~UserAcctID~readonly~NA|FirstName~UserName~disable~NA|LastName~LastName~enable~NA|Password~UserPwd~readonly~" .$defaultPwd ."|Email~UserEmail~enable~NA|Phone~UserPhone~enable~NA|RegiteredDate~RegisterDate~readonly~" .$srvrDate ."|ExpiryDate~ExpiryDate~readonly~" .$expiryDate ."|Roles~UserAdmin~readonly~user";
+$userCrdn = "Member|useracct|UserID|UserAcctID|USR|AppendnEditnDelete||AccountID~UserAcctID~readonly~NA|FirstName~UserName~disable~NA|LastName~LastName~enable~NA|Password~UserPwd~readonly~NA|Email~UserEmail~enable~NA|Phone~UserPhone~enable~NA|RegiteredDate~RegisterDate~readonly~" .$srvrDate ."|ExpiryDate~ExpiryDate~readonly~" .$expiryDate ."|Roles~UserAdmin~readonly~user";
 
 $UserFavCrdn = "Favourites|FavID|UserAcctID|TrackID|UpdateDate~" .$srvrDate;
 
@@ -60,10 +60,10 @@ $trackCrdn = "Track|videotrack|VideoID|TrackID|TRCK|AppendnEditnDelete||Code~Tra
 
 //Audit table credentials
 //$auditCrdn = "AuditLog|AuditLog|AuditLogID|LOG|Delete||Code~AuditLogID~readonly~NA|DBInfo~DBInfo~readonly~NA|KeyColInfo~KeyColInfo~readonly~NA|LogMessage~LogMessage~readonly~NA|Date~LogDate~readonly~currdate";
-$auditCrdn = "AuditLog|AuditLog|LogID|AuditLogID|LOG|Delete||Code~AuditLogID~readonly~NA|DBInfo~DBInfo~readonly~NA|KeyColInfo~KeyColInfo~readonly~NA|LogMessage~LogMessage~readonly~NA|Date~LogDate~readonly~currdate";
+$auditCrdn = "AuditLog|auditlog|LogID|AuditLogID|LOG|Delete||Code~AuditLogID~readonly~NA|DBInfo~DBInfo~readonly~NA|KeyColInfo~KeyColInfo~readonly~NA|LogMessage~LogMessage~readonly~NA|Date~LogDate~readonly~currdate";
 
 //TrackAudit table credentials
-$trackAuditCrdn = "TrackLog|AuditTran|TranID|TranID|TRAN|Delete||TranID~TranID~readonly~NA|UserAcctID~UserAcctID~readonly~NA|UserName~UserName~readonly~NA|TitleID~TrackID~readonly~NA|UserAction~UserAction~readonly~NA|InteractionPoint~InteractionPoint~readonly~NA|InteractionType~InteractionType~readonly~NA";
+$trackAuditCrdn = "TrackLog|audittran|TranID|TranID|TRAN|Delete||TranID~TranID~readonly~NA|UserAcctID~UserAcctID~readonly~NA|UserName~UserName~readonly~NA|TitleID~TrackID~readonly~NA|UserAction~UserAction~readonly~NA|InteractionPoint~InteractionPoint~readonly~NA|InteractionType~InteractionType~readonly~NA";
 $trackSrchCrdn = "AuditTran|TranID|UserAcctID|TrackID";
 
 function siteURL()
@@ -125,7 +125,7 @@ return $dateVal;
 
 function formatDate($strDateVal,$frmtVal) {
 $dateVal = "";
-$date=date_create($strDateVal);
+$date = date_create($strDateVal);
 if ($frmtVal == "1") {
 $dateVal = date_format($date,"Y-m-d");
 } else {
