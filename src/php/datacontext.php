@@ -394,13 +394,9 @@ for (var i=0;i<colCnt;i++) {
     colX = document.createElement("td");
 
     if (colName == 'TrackSrc') {
-        colX.style("poistion:realtive;");
+        colX.style = "position:relative;";
     }
-/*
-    colName = "";
-    colName = hdrX.childNodes[i].id;
-    //alert(colName);
-*/
+
     valX = "";
     if (tranMode == 'edit') {
         var tagVal = rowData[i].childNodes[0].tagName.toLowerCase();
