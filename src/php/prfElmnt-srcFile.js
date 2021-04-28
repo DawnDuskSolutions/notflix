@@ -46,7 +46,6 @@ prfElmntDef = prfElmntDef + "||" + "prfrw2cl1|div1|div";
 prfAttrDef = "";
 
 prfAttrDef = "tblProfile|style|width:100%;margin:10px;";
-//prfAttrDef = prfAttrDef + "||" + "prfrw1|style|height:100px;background:#FAEBD7;";
 prfAttrDef = prfAttrDef + "||" + "prfrw1|style|height:100px;";
 prfAttrDef = prfAttrDef + "||" + "prfrw2|style|height:80px;background-color:tranparent";
 
@@ -69,7 +68,7 @@ prfAttrDef = prfAttrDef + "||" + "prfLblUsrPwd|style|display:none;";
 
 prfAttrDef = prfAttrDef + "||" + "prfImg|style|width:20px;height:15px;vertical-align:middle;";
 
-imgSrc = urlPath + "/icons/editImg.jpg";
+imgSrc = urlPath + "image-icn/editImg.jpg";
 
 prfAttrDef = prfAttrDef + "||" + "prfImg|src|" +imgSrc;
 prfAttrDef = prfAttrDef + "||" + "prfImg|alt|profileImg";

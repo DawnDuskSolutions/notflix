@@ -54,19 +54,10 @@ background-color:transparent;
 }
 
 button:hover, button:active, #btnSave:hover, #btnSave:active, #acctSave:hover, #acctSave:active {
-background-color: #e6f5ff;
+//background-color: #e6f5ff;
+opacity: 0.8;
 border-bottom : 2px solid black;
 cursor: pointer;
-}
-
-#divMultiLn, #divImgSrc {
-position:absolute;
-padding:10px;
-margin: 0px;
-overflow:auto;
-background-color:#fefefe;
-border: 2px solid black;
-border-radius:5px;
 }
 
 .modal {

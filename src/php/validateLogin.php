@@ -179,9 +179,11 @@ mnuVal = '<?php echo $frmMnuVal ?>';
 usrName = '<?php echo $frmUsrID ?>';
 
 if (mnuVal == 'login') {
+
 tempX = parent.document.getElementById("mnuHome");
 //alert(tempX.id);
 tempX.click();
+
 } else {
 //var urlPath = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port;
 var urlPath = sessionStorage.siteDomainName;

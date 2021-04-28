@@ -23,18 +23,18 @@
 <script src="src/js/centerLayout.js"></script>
 <script src="src/js/footerLayout.js"></script>
 
-<script src="src/php/tranFrm-srcFile.js"></script>
-
 </head>
 <?php
 include 'src/php/connsrvr.php';
 
 $rootDir = $config["rootpath"];
+$siteUrlVal = siteURL();
 ?>
 <script>
 
 //var siteWrkDir = "notflix";
 var siteWrkDir = '<?php echo $rootDir ?>';
+var strUrlVal = '<?php echo $siteUrlVal ?>';
 
 window.onunload = function () {
 sessionStorage.clear();
@@ -109,22 +109,35 @@ readContextData();
 function funcInit() {
 
 initLoadEvent();
-var strColor = "blue";
+var strColor = "green";
 toggleColorOnclick(strColor);
 
 if(typeof(Storage) !== "undefined") {
 sessionStorage.clickcount = 0;
-
+/*
 if (siteWrkDir == "") {
 sessionStorage.siteDomainName = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/";
 } else {
 sessionStorage.siteDomainName = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + siteWrkDir + "/";
 }
-
+*/
+sessionStorage.siteDomainName = strUrlVal;
+sessionStorage.clrSelected = strColor;
 }
 onUserChanged("loginit");
 //alert(sessionStorage.siteDomainName);
+//alert(sessionStorage.clrSelected);
 }
+
+function getCounter() {
+var rowCnt = 0;
+if (sessionStorage.clickcount) {
+rowCnt = sessionStorage.clickcount;
+} else {
+rowCnt = 0;
+}
+return rowCnt;
+} // end func
 
 </script>
 <body id="frm" onload="funcInit()">

@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="tranCSS-srcFile.css">
 <script src="tranFrm-srcFile.js"></script>
 <script src="validateFrm.js"></script>
-<script src="src/js/colorLayout.js"></script>
+
 </head>
 
 <body id="frm">
@@ -23,6 +23,7 @@ display:none;
 #divFrm {
 display:none;
 text-align:center;
+}
 }
 </style>
 
@@ -47,56 +48,39 @@ var jsdlmtr = "|";
 
 document.getElementById("divFrm").style.display = "none";
 
-
-function getColorPalatte(strColor) {
-
-//alert("Message Line : getColorPalatte ");
-var tempclrX = null;
-
-    if (strColor == 'green' ) {
-        tempclrX = clr_green;
-    } else if (strColor == 'blue' ) {
-        tempclrX = clr_blue;
-    } else if (strColor == 'orange' ) {
-        tempclrX = clr_orange;
-    } else if (strColor == 'yellow' ) {
-        tempclrX = clr_yellow;
-    } else if (strColor == 'grey' ) {
-        tempclrX = clr_grey;
-    } else {
-        alert("invalid object");
-    }// if strcolor valid theme
-
-    //alert("color palatte obj : " + tempclrX);
-return tempclrX;
-} // end func
-
 strColor = sessionStorage.clrSelected;
-setColor(strColor,"th");
+var themeClr = parent.getColorPalatte(strColor);
+var clrVal = "";
+var clrName = "";
+
+if (themeClr == null || themeClr == undefined) {
+//skip
+} else {
+clrName = strColor + "_clrLight";
+clrVal = themeClr[clrName].bgColor;
+}
 
 function setColor(strColor,clrOpt,tagVal) {
 var thArr = document.getElementsByTagName("th");
-
-var clrVal = "";
 var tempX = "";
-
     if (thArr == null || thArr == undefined) {
         //skip
     } else {
     //alert(thArr.length);
 
-        clrVal = "#99d6ff";
+        //clrVal = "#99d6ff";
+	clrName1 = strColor + "_clrLight";
+	clrVal1 = themeClr[clrName1].bgColor;
 
-        for (i=0;i<thArr.length;i++) {
+       for (i=0;i<thArr.length;i++) {
             tempX = document.getElementById(thArr[i].id);
             if (tempX == null || tempX == undefined) {
                 //skip
             } else {
-                tempX.style.backgroundColor = clrVal;
+                tempX.style.backgroundColor = clrVal1;
             }
         } //for loop
     } // thArr null
-
 }// end func
 
 function exportData() {
@@ -285,6 +269,19 @@ editedFrm = "no";
 return validFrm;
 }
 
+function closePopupFrm() {
+var divX = document.getElementById("popupDiv");
+divX.style.display = "none";
+
+var divY = document.getElementById("popupFrm");
+if (divY == null || divY == "" || divY == undefined) {
+//skip
+} else {
+removeAllChildNodes(divY);
+divX.removeChild(divY);
+}
+}
+
 function showPopupFrm(tranMode,dbX,selIndx) {
 //alert("Hello It works : tranMode: " + tranMode + " dbName: " + dbX + " selIndx: " + selIndx);
 //alert(document.getElementById("popupDiv"));
@@ -299,6 +296,7 @@ divX.style.display = "block";
 divY = document.createElement("div");
 divY.setAttribute("class","modal-content");
 divY.setAttribute("id","popupFrm");
+divY.style.background = clrVal;
 
 var elmntX = "";
 
@@ -395,6 +393,9 @@ for (var i=0;i<colCnt;i++) {
     colX = "";
     colX = document.createElement("td");
 
+    if (colName == 'TrackSrc') {
+        colX.style("poistion:realtive;");
+    }
 /*
     colName = "";
     colName = hdrX.childNodes[i].id;
@@ -1389,6 +1390,7 @@ tblX.appendChild(rowX);
 
 } //end func
 
+setColor(strColor,"th");
 </script>
 
 <!-- The Modal -->

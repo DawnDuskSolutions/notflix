@@ -9,6 +9,22 @@ var divX = document.getElementById("popupDiv");
   }
 }
 
+//alert(urlVal);
+//alert(sessionStorage.clrSelected);
+
+var strColor = sessionStorage.clrSelected;
+var themeClr = parent.getColorPalatte(strColor);
+
+var clrName = "";
+var clrVal = "";
+
+if (themeClr == null || themeClr == undefined) {
+//skip
+} else {
+clrName = strColor + "_clrSelf";
+clrVal = themeClr[clrName].bgColor;
+}
+
 function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
@@ -39,6 +55,7 @@ valX =strVal;
 return valX;
 }
 
+/*
 function getCounter() {
 var rowCnt = 0;
 if (sessionStorage.clickcount) {
@@ -48,6 +65,7 @@ rowCnt = 0;
 }
 return rowCnt;
 } // end func
+*/
 
 function resetCounter() {
 if (sessionStorage.clickcount) {
@@ -72,75 +90,6 @@ function decreaseCounter() {
       sessionStorage.clickcount = 0;
     }
 }
-
-function closePopupFrm() {
-var divX = document.getElementById("popupDiv");
-divX.style.display = "none";
-
-var divY = document.getElementById("popupFrm");
-if (divY == null || divY == "" || divY == undefined) {
-//skip
-} else {
-removeAllChildNodes(divY);
-divX.removeChild(divY);
-}
-}
-
-/*
-function funcZoomImgOnclick(trckSrcVal,prodName){
-var divX = document.getElementById("popupDiv");
-divX.style.paddingTop = "10px";
-divX.style.display = "block";
-
-var divY = document.getElementById("popupFrm");
-if (divY == null || divY == "" || divY == undefined) {
-//skip
-} else {
-removeAllChildNodes(divY);
-divX.removeChild(divY);
-}
-
-divY = document.createElement("div");
-divY.setAttribute("id","popupFrm");
-divY.setAttribute("class","modal-content");
-divY.setAttribute("text-align","center");
-divY.style.width = "70%";
-
-var spanX = "";
-spanX = document.createElement("span");
-spanX.setAttribute("class","close");
-spanX.innerHTML = "&times";
-spanX.setAttribute("onclick","closePopupFrm()");
-divY.appendChild(spanX);
-
-var elmntX = "";
-elmntX = document.createElement("center");
-
-var elmntY = "";
-elmntY = document.createElement("label");
-elmntY.setAttribute("style","font-size:16px;padding:10px;");
-//var strVal = prodName.replace(/\|/g, " ");
-var strVal = funcReplaceStrVal(prodName,"|"," ");
-elmntY.innerHTML = strVal;
-elmntX.appendChild(elmntY);
-
-elmntY = "";
-elmntY = document.createElement("br");
-elmntX.appendChild(elmntY);
-
-var elmntZ = "";
-elmntZ = document.createElement("video");
-elmntZ.setAttribute("src",trckSrcVal);
-elmntZ.setAttribute("width","600px");
-elmntZ.setAttribute("height","500px");
-elmntZ.setAttribute("controls","controls");
-elmntX.appendChild(elmntZ);
-
-divY.appendChild(elmntX);
-
-divX.appendChild(divY);
-}
-*/
 
 function funcBindElmntEvent(dbX,dbCol,selIndx) {
 
@@ -174,15 +123,15 @@ txtVal = tempX.value;
 }
 
 if (dbCol == "TrackSrc") {
-funcShowImageView(parentX,txtVal,blnVal);
+funcShowVideoView(parentX,txtVal,blnVal);
 } else {
 funcReadMultiLineTxt(parentX,txtVal);
 }
 
 } // end func
 
-function funcHideImageView() {
-var divX = document.getElementById("divImgSrc");
+function funcHideVideoView() {
+var divX = document.getElementById("divVideoSrc");
 
 if (divX == null || divX == undefined || divX == "") {
 //skip
@@ -193,15 +142,18 @@ tempX.removeChild(divX);
 }
 } // end func
 
-function funcShowImageView(parentX,dataVal,blnAppdSiteURL) {
+function funcShowVideoView(parentX,dataVal,blnAppdSiteURL) {
 
-funcHideImageView();
+funcHideVideoView();
 
 var divX = "";
 divX = document.createElement("div");
-divX.setAttribute("id","divImgSrc");
+divX.setAttribute("id","divVideoSrc");
+divX.style = "position:absolute;padding:10px;margin: 0px;overflow:auto;border-radius:5px;border: 2px solid black;";
 divX.style.minWidth = "210px";
 divX.style.minHeight = "210px";
+divX.style.backgroundColor = clrVal;
+
 
 elmntX = document.createElement("video");
 elmntX.setAttribute("id","trckView");
@@ -222,7 +174,7 @@ divX.appendChild(elmntX);
 elmntX = document.createElement("button");
 elmntX.setAttribute("id","btnClose");
 elmntX.setAttribute("style","padding:10px;outline:none;border:0px;border-radius:5px;background-color:#e6f5ff;");               
-elmntX.setAttribute("onclick","funcHideImageView()");
+elmntX.setAttribute("onclick","funcHideVideoView()");
 elmntX.innerHTML = "Close";
 divX.appendChild(elmntX);
 
@@ -248,7 +200,9 @@ funcHideMultiLineTxt();
 var divX = "";
 divX = document.createElement("div");
 divX.setAttribute("id","divMultiLn");
+divX.style = "position:absolute;padding:10px;margin: 0px;overflow:auto;border-radius:5px;border: 2px solid black;";
 divX.style.minWidth = "200px";
+divX.style.backgroundColor = clrVal;
 
 elmntX = document.createElement("p");
 elmntX.setAttribute("id","multiLnTxt");

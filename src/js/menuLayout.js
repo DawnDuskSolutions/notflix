@@ -57,7 +57,7 @@ mnuAttrDef = mnuAttrDef + "||" + "divAdmin|class|clsMnuCnt";
 mnuAttrDef = mnuAttrDef + "||" + "mnuLbl01|innerHTML|&nbsp;";
 
 mnuAttrDef = mnuAttrDef + "||" + "imgLogo|alt|Logo";
-mnuAttrDef = mnuAttrDef + "||" + "imgLogo|src|icons/logo-icn.png";
+mnuAttrDef = mnuAttrDef + "||" + "imgLogo|src|image-icn/logo-icn.png";
 mnuAttrDef = mnuAttrDef + "||" + "imgLogo|style|width:40px;height:40px;border-radius:50%;";
 
 mnuAttrDef = mnuAttrDef + "||" + "logoLbl|style|font-size:20px;";
@@ -67,12 +67,12 @@ mnuAttrDef = mnuAttrDef + "||" + "mnuHome|innerHTML|HOME";
 mnuAttrDef = mnuAttrDef + "||" + "mnuHome|onclick|onHomeBtnClick()";
 
 mnuAttrDef = mnuAttrDef + "||" + "mnuLogin|alt|Login";
-mnuAttrDef = mnuAttrDef + "||" + "mnuLogin|src|icons/login-icn.png";
+mnuAttrDef = mnuAttrDef + "||" + "mnuLogin|src|image-icn/login-icn.png";
 mnuAttrDef = mnuAttrDef + "||" + "mnuLogin|onclick|funcShowLoginFrm('login')";
 
 //mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|innerHTML|TRACK";
 mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|alt|Track";
-mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|src|icons/track-icn.png";
+mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|src|image-icn/track-icn.png";
 mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|style|border-radius:50%";
 mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|onclick|onTrackImgClick('track')";
 
@@ -86,7 +86,7 @@ mnuAttrDef = mnuAttrDef + "||" + "mnuTrackAudit|innerHTML|TRACK AUDIT";
 mnuAttrDef = mnuAttrDef + "||" + "mnuTrackAudit|onclick|new onAdminImgClick('trackaudit')";
 
 mnuAttrDef = mnuAttrDef + "||" + "mnuAdmin|alt|Admin";
-mnuAttrDef = mnuAttrDef + "||" + "mnuAdmin|src|icons/admin-icn.png";
+mnuAttrDef = mnuAttrDef + "||" + "mnuAdmin|src|image-icn/admin-icn.png";
 mnuAttrDef = mnuAttrDef + "||" + "mnuAdmin|style|border-radius:50%";
 
 

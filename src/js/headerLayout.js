@@ -12,7 +12,7 @@ hdrElmntDef = hdrElmntDef + "||" + "hdrCol01|divClr|div";
 hdrElmntDef = hdrElmntDef + "||" + "divClr|spanSep01|span";
 hdrElmntDef = hdrElmntDef + "||" + "divClr|btnBlue|button";
 hdrElmntDef = hdrElmntDef + "||" + "divClr|spanSep02|span";
-hdrElmntDef = hdrElmntDef + "||" + "divClr|btnGrey|button";
+hdrElmntDef = hdrElmntDef + "||" + "divClr|btnGreen|button";
 hdrElmntDef = hdrElmntDef + "||" + "divClr|spanSep03|span";
 
 hdrElmntDef = hdrElmntDef + "||" + "hdrCol01|divText|div";

@@ -25,6 +25,7 @@ text-align:center;
   font-size:30px;
 }
 
+/*
 .clsDivCnt {
 position:absolute;
 display:none;
@@ -41,11 +42,12 @@ z-index: 1;
 .clsDivCnt:after {
   content: "";
   position:absolute;
- 
+  //background:#ddd;
+  background:#ddd;
   width:20px;
   height:20px;
   transform:rotate(-45deg);
-  background:#ddd;
+  
   border: 1px solid green;
   z-index:-1;
   border-left: 0px solid transparent;
@@ -57,6 +59,7 @@ z-index: 1;
 .clsDivCnt button:hover {
 background-color: #e6f5ff;
 }
+*/
 
 td {
 border: 0px solid black;
@@ -150,6 +153,31 @@ var currUsrRS = '<?php echo $GLOBALS['currUsr'] ?>';
 
 var currUsrAddrRS = "";
 
+strColor = sessionStorage.clrSelected;
+
+function setUsrPrfColor(strColor) {
+
+var clrVal = "";
+var clrName = "";
+
+themeClr = parent.getColorPalatte(strColor);
+
+if (themeClr == null || themeClr == undefined) {
+//skip
+} else {
+clrName = strColor + "_clrSelf";
+clrVal = themeClr[clrName].bgColor;
+
+var elem = document.getElementsByClassName("circle");
+for(var i = 0; i < elem.length; i++) {
+  //alert(elem[i].tagName.toLowerCase());
+  if (elem[i].tagName.toLowerCase() == 'p') {
+      elem[i].style.backgroundColor = clrVal;
+  } //if
+} // for
+} // if themeClr null
+} // end func
+
 func_bindPrfFrmElmnt();
 
 function funcAssignUserDefault() {
@@ -176,6 +204,7 @@ mnuVal = "usracct";
 }
 onUserMnuBtnClick(mnuVal,'div1');
 
+setUsrPrfColor(strColor);
 }
 
 funcAssignUserDefault();

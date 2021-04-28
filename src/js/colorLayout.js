@@ -12,10 +12,11 @@ var clr_grey = {
 }
 
 var clr_green = {
-"green_clrLight" : {colorID:"01",colorName:"green_light",bgColor:"#00b300"},
+//"green_clrLight" : {colorID:"01",colorName:"green_light",bgColor:"#00b300"},
+"green_clrLight" : {colorID:"01",colorName:"green_light",bgColor:"#33ff33"},
 "green_clrSelf" : {colorID: "02",colorName: "green_self",bgColor: "#008000"},
 "green_clrDark" : {colorID:"03",colorName:"green_light",bgColor:"#004d00"},
-"green_clrMenu" : {colorID: "04",colorName: "green_menu",bgColor: "#00cc00"}
+"green_clrMenu" : {colorID: "04",colorName: "green_menu",bgColor: "#00ff00"}
 }
 
 var clr_blue = {
@@ -72,10 +73,35 @@ clrVal = themeClr[clrName].bgColor;
 setColorByElmntID("mnuRow",clrVal);
 setColorByElmntID("ftrRow",clrVal);
 
+var elem = document.getElementsByClassName("circle");
+for(var i = 0; i < elem.length; i++) {
+  //alert(elem[i].tagName.toLowerCase());
+  if (elem[i].tagName.toLowerCase() == 'span') {
+      elem[i].style.backgroundColor = clrVal;
+  }
+}
+
 clrName = strColor + "_clrLight";
 clrVal = themeClr[clrName].bgColor;
 setColorByElmntID("hdrRow",clrVal);
 setColorByElmntID("dynaRow",clrVal);
+
+var elem = document.getElementsByClassName("clsMnuCnt");
+for(var i = 0; i < elem.length; i++) {
+  //alert(elem[i].tagName.toLowerCase());
+  if (elem[i].tagName.toLowerCase() == 'div') {
+      elem[i].style.backgroundColor = clrVal;
+  }
+}
+
+var elem = document.getElementsByClassName("imgNavCls");
+for(var i = 0; i < elem.length; i++) {
+  //alert(elem[i].tagName.toLowerCase());
+  if (elem[i].tagName.toLowerCase() == 'a') {
+      elem[i].style.backgroundColor = clrVal;
+  }
+}
+
 } // if themeClr == null
 
 } //end func
