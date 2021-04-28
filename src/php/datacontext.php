@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="tranCSS-srcFile.css">
 <script src="tranFrm-srcFile.js"></script>
 <script src="validateFrm.js"></script>
+<script src="src/js/colorLayout.js"></script>
 </head>
 
 <body id="frm">

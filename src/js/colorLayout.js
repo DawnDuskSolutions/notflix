@@ -11,6 +11,13 @@ var clr_grey = {
 "grey_clrMenu" : {colorID: "04",colorName: "grey_menu",bgColor: "#f0f5f5"}
 }
 
+var clr_green = {
+"green_clrLight" : {colorID:"01",colorName:"green_light",bgColor:"#00b300"},
+"green_clrSelf" : {colorID: "02",colorName: "green_self",bgColor: "#008000"},
+"green_clrDark" : {colorID:"03",colorName:"green_light",bgColor:"#004d00"},
+"green_clrMenu" : {colorID: "04",colorName: "green_menu",bgColor: "#00cc00"}
+}
+
 var clr_blue = {
 "blue_clrLight" : {colorID:"01",colorName:"blue_light",bgColor:" #ccebff"},
 "blue_clrSelf" : {colorID: "02",colorName: "blue_self",bgColor: "#99d6ff"},

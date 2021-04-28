@@ -1,6 +1,4 @@
-CREATE DATABASE `notflix` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-
-SELECT * FROM notflix.useracct;CREATE TABLE `auditlog` (
+CREATE TABLE `auditlog` (
   `LogID` int NOT NULL AUTO_INCREMENT,
   `AuditLogID` varchar(12) NOT NULL,
   `DBInfo` varchar(100) DEFAULT NULL,
@@ -73,4 +71,3 @@ CREATE TABLE `videotrack` (
   UNIQUE KEY `TrackID_UNIQUE` (`TrackID`),
   UNIQUE KEY `ID_UNIQUE` (`VideoID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-

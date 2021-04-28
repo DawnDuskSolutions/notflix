@@ -120,7 +120,7 @@ sessionStorage.siteDomainName = window.location.protocol + "//" + window.locatio
 } else {
 sessionStorage.siteDomainName = window.location.protocol + "//" + window.location.hostname + ":" + window.location.port + "/" + siteWrkDir + "/";
 }
-sessionStorage.clrSelected = strColor;
+
 }
 onUserChanged("loginit");
 //alert(sessionStorage.siteDomainName);
