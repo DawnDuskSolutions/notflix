@@ -34,9 +34,9 @@ imgAttrDef = imgAttrDef + "||" + "imgDisp|alt|imageDisplay";
 imgAttrDef = imgAttrDef + "||" + "imgDisp|style|width:100%;height:500px;display:block;text-align:center;";
 
 var imgArr = {
- 1: {imgID:"img01",imgCode:"1",imgSrc:"images/img03.jpg",imgCaption:"Image 1",currImg:"NA"},
- 2: {imgID:"img02",imgCode:"2",imgSrc:"images/img01.jpg",imgCaption:"Image 2",currImg:"NA"},
- 3: {imgID:"img03",imgCode:"3",imgSrc:"images/img05.jpg",imgCaption:"Image 3",currImg:"NA"},
+ 1: {imgID:"img01",imgCode:"1",imgSrc:"images/img07.jpg",imgCaption:"Image 1",currImg:"NA"},
+ 2: {imgID:"img02",imgCode:"2",imgSrc:"images/img06.jpg",imgCaption:"Image 2",currImg:"NA"},
+ 3: {imgID:"img03",imgCode:"3",imgSrc:"images/img08.jpg",imgCaption:"Image 3",currImg:"NA"},
 };
 
 

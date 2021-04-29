@@ -1,11 +1,11 @@
 
 //Global Attribute rule definition
 
-var tblAttrRule =  "hdrRow|style|width:100%;height:40px;background:#FAEBD7;";
+var tblAttrRule =  "hdrRow|style|width:100%;height:20px;background:#FAEBD7;";
 
-tblAttrRule = tblAttrRule + "||" + "mnuRow|style|width:100%;height:80px;";//background-color:#FFFAF0;"; //border-bottom:3px solid #FAEBD7;";
+tblAttrRule = tblAttrRule + "||" + "mnuRow|style|width:100%;height:40px;";//background-color:#FFFAF0;"; //border-bottom:3px solid #FAEBD7;";
 
-tblAttrRule = tblAttrRule + "||" + "dynaRow|style|width:100%;";//background-color:#FFFAF0;";
+tblAttrRule = tblAttrRule + "||" + "dynaRow|style|width:100%;width;1000px;";//background-color:#FFFAF0;";
 
 //tblAttrRule = tblAttrRule + "||" + "rvwRow|style|font-size:12px;color:black;width:100%;height:200px;background-color:#FAFAD2;";
 

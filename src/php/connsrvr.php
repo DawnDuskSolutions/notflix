@@ -43,18 +43,18 @@ $trckSrcDB = "tracksrclog|SrcID|TrackSrcID|SRC";
 
 $auditDB = "auditlog|LogID|AuditLogID|LOG";
 
-$loginCrdn = "UserAcct|UserName|UserPwd|UserAdmin";
+$loginCrdn = "useracct|UserName|UserPwd|UserAdmin";
 
 //$userCrdn = "Member|useracct|UserID|UserAcctID|USR|AppendnEditnDelete||AccountID~UserAcctID~readonly~NA|FirstName~UserName~disable~NA|LastName~LastName~enable~NA|Password~UserPwd~readonly~" .$defaultPwd ."|Email~UserEmail~enable~NA|Phone~UserPhone~enable~NA|RegiteredDate~RegisterDate~readonly~" .$srvrDate ."|ExpiryDate~ExpiryDate~readonly~" .$expiryDate ."|Roles~UserAdmin~readonly~user";
 
 $userCrdn = "Member|useracct|UserID|UserAcctID|USR|AppendnEditnDelete||AccountID~UserAcctID~readonly~NA|FirstName~UserName~disable~NA|LastName~LastName~enable~NA|Password~UserPwd~readonly~NA|Email~UserEmail~enable~NA|Phone~UserPhone~enable~NA|RegiteredDate~RegisterDate~readonly~" .$srvrDate ."|ExpiryDate~ExpiryDate~readonly~" .$expiryDate ."|Roles~UserAdmin~readonly~user";
 
-$UserFavCrdn = "Favourites|FavID|UserAcctID|TrackID|UpdateDate~" .$srvrDate;
+$UserFavCrdn = "favourites|FavID|UserAcctID|TrackID|UpdateDate~" .$srvrDate;
 
 //Review table credentials
 $rvwCrdn = "Review|UserRvw|RvwID|RVW|Delete||ReviewID~RvwID~readonly~NA|Name~RvwName~readonly~NA|Email~RvwEmail~readonly~NA|Phone~RvwPhone~readonly~NA|Message~RvwMsg~readonly~NA";
 
-//Stock table credentials
+//videotrack table credentials
 //$trackCrdn = "Track|videotrack|TrackID|TRCK|AppendnEditnDelete||Code~TrackID~readonly~NA|Name~TrackTitle~enable~NA|Description~TrackDesc~enable~NA|Src~TrackSrc~enable~NA|Date~TrackUploadDate~readonly~" .$srvrDate;
 $trackCrdn = "Track|videotrack|VideoID|TrackID|TRCK|AppendnEditnDelete||Code~TrackID~readonly~NA|Name~TrackTitle~enable~NA|Description~TrackDesc~enable~NA|Src~TrackSrc~enable~NA|Date~TrackUploadDate~readonly~" .$srvrDate;
 
@@ -64,7 +64,7 @@ $auditCrdn = "AuditLog|auditlog|LogID|AuditLogID|LOG|Delete||Code~AuditLogID~rea
 
 //TrackAudit table credentials
 $trackAuditCrdn = "TrackLog|audittran|TranID|TranID|TRAN|Delete||TranID~TranID~readonly~NA|UserAcctID~UserAcctID~readonly~NA|UserName~UserName~readonly~NA|TitleID~TrackID~readonly~NA|UserAction~UserAction~readonly~NA|InteractionPoint~InteractionPoint~readonly~NA|InteractionType~InteractionType~readonly~NA";
-$trackSrchCrdn = "AuditTran|TranID|UserAcctID|TrackID";
+$trackSrchCrdn = "audittran|TranID|UserAcctID|TrackID";
 
 function siteURL()
 {
@@ -136,14 +136,10 @@ return $dateVal;
 
 function connMySQL($host,$user,$pwd,$db) {
 $conn = new mysqli($host, $user, $pwd, $db);
-/*
+
 // Check connection
 if ($conn->connect_error) {
-  die("<br><br>Connection failed: " . $conn->connect_error ."<br><br>");
-}
-*/
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+  die("<br><br>Connection failed: " . $conn->connect_error ." host: " .$host ." database: " .$db ."<br><br>");
 }
 
 //echo "Connected successfully";

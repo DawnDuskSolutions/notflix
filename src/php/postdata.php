@@ -10,10 +10,11 @@
 include 'connsrvr.php';
 $mnuInfo = "";
 
+/*
 function fetchEntityMaxVal($srvrConn,$txtVal) {
 //$tempArr = "";
-//echo $txtVal;
-//echo "<br>";
+echo $txtVal;
+echo "<br>";
 
 switch ($txtVal) {
   case "useracct":
@@ -51,6 +52,7 @@ $keyCol = $dbArr[2];
 $keyPrefix = $dbArr[3];
 }
 
+
 //echo "<br><br>";
 $tsql1 = "SELECT COALESCE(MAX(" .$autoGenKeyCol ."),0) as " .$autoGenKeyCol ." FROM " .$dbX;
 //echo $tsql1;
@@ -64,8 +66,8 @@ $maxVal = generateMAXID($keyPrefix,$tmpMaxVal,"yes","NA");
 //echo "MAX - Code - " .$dbX .":" .$maxVal;
 
 return $maxVal;
-
 }
+*/
 
 function funcBindInsertStmt($srvrConn) {
 //if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -134,11 +136,12 @@ if ($dbName == "auditlog" && $tranMode == "Delete") {
 } else {
 //'" .$GLOBALS['auditIDPrefix'] ."
 
-$dbX = "auditlog";
-$auditID = fetchEntityMaxVal($srvrConn,$dbX);
+//$dbX = "auditlog";
+//$auditID = fetchEntityMaxVal($srvrConn,$dbX);
+//$auditID = $idVal;
 
 $testSQL = "INSERT INTO auditlog (AuditLogID,DBInfo,KeyColInfo,LogMessage,LogDate) VALUES ";
-$testSQL = $testSQL ."('" .$auditID ."','" .$dbVal ."','" .$keyVal ."','" .$rsnVal1 ."','" .$dateVal ."')";
+$testSQL = $testSQL ."('" .$idVal ."','" .$dbVal ."','" .$keyVal ."','" .$rsnVal1 ."','" .$dateVal ."')";
 
 //echo $testSQL;
 //echo "<br><br>";
@@ -224,7 +227,7 @@ $arr = "";
 //$arr = explode($GLOBALS['dlmtr1'],$updateVal);
 $arr = explode($GLOBALS['dlmtr1'],$rsnVal2);
 
-$currDBMaxVal = fetchEntityMaxVal($srvrConn,$dbName);
+//$currDBMaxVal = fetchEntityMaxVal($srvrConn,$dbName);
 
 $sqlVal = "INSERT INTO " .$dbName ." (";
 
@@ -293,10 +296,11 @@ echo "<br><br>";
 echo $valArr[2];
 echo "<br><br>";
 */
-
+/*
 if ($valArr[0] == "UserAcctID" || $valArr[0] == "TrackID") {
 $valArr[2] = $currDBMaxVal;
 }
+*/
 
 if ($valArr[0] == "UserPwd") {
 $hash = base64_encode ($valArr[2]);
@@ -389,15 +393,17 @@ for ($i=0; $i<$rowCnt; $i++) {
  echo "<br><br>";
 */
 
-uploadImgFile($srvrConn,$trckName,$itemID,$itemFromSrc,$itemDestSrc,$rsnVal,$i);
+uploadVideoFile($srvrConn,$trckName,$itemID,$itemFromSrc,$itemDestSrc,$rsnVal,$i);
 
 } // for loop
 
 } // end func
 
 
-function uploadImgFile($srvrConn,$trckName,$trckID,$trckFrmSrc,$trckDstSrc,$rsnVal,$key) {
+function uploadVideoFile($srvrConn,$trckName,$trckID,$trckFrmSrc,$trckDstSrc,$rsnVal,$key) {
  //$target_dir = "notflix/src/php/videosrc";
+ $maxsize = 5242880; // 5MB
+
  $target_dir = "videosrc/";
  $name = basename($_FILES["fileObj"]["name"][$key]);
  $target_file = $target_dir .$name;
@@ -413,49 +419,46 @@ $videoFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
 
 // Check if image file is a actual image or fake image
 if(isset($_POST["submit"])) {
-/*
-  $check = getimagesize($_FILES["fileObj"]["tmp_name"][$key]);
-  if($check !== false) {
-    //echo "File is an image - " . $check["mime"] . ".";
-    $uploadOk = 1;
-  } else {
-    echo "File is not an image.";
-    $uploadOk = 0;
-  }
-*/
+
 $uploadOk = 1;
 }
 
 // Check if file already exists
 if (file_exists($target_file)) {
-  echo "Sorry, file already exists.";
+  echo "Sorry, file already exists - " .$target_file ." - " .$trckName ;
   $uploadOk = 0;
 }
 
-/*
+
 // Check file size
-if ($_FILES["fileObj"]["size"][$key] > 500000) {
-  echo "Sorry, your file is too large.";
+if ($_FILES["fileObj"]["size"][$key] > $maxsize) {
+  echo "File too large. File must be less than 5MB.";  
   $uploadOk = 0;
 }
-*/
+
 
 // Allow certain file formats
-if($videoFileType != "mp4" && $videoFileType != "mov" && $videoFileType != "wmv"
-&& $videoFileType != "flv" ) {
-  echo "Sorry, only MP4, MOV, WMV & FLV files are allowed.";
+if($videoFileType != "mp4" && $videoFileType != "mov" && $videoFileType != "avi"
+&& $videoFileType != "3gp" && $videoFileType != "mpeg" ) {
+  echo "Sorry, only MP4, MOV, AVI, 3gp & mpeg files are allowed.";
   $uploadOk = 0;
 }
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
   echo "Sorry, your file was not uploaded.";
+  exit();
 // if everything is ok, try to upload file
 } else {
   if (move_uploaded_file($_FILES["fileObj"]["tmp_name"][$key], $target_file)) {
+    $uploadOk = 1;
     //echo "The file ". htmlspecialchars( basename( $_FILES["fileObj"]["name"][$key])). " has been uploaded.";
   } else {
+    $uploadOk = 0;
     echo "Sorry, there was an error uploading your file.";
+    echo "<br> <br>";
+    echo "error : " .$_FILES['userfile']['error'];
+    exit();
   }
 }
 
@@ -471,7 +474,7 @@ echo "<br><br>";
 */
 rename($target_file,$destSrc);
 
-appendStckImgAudit($srvrConn,$trckName,$trckID,$trckFrmSrc,$trckDstSrc,$rsnVal);
+appendTrckSrcAudit($srvrConn,$trckName,$trckID,$trckFrmSrc,$trckDstSrc,$rsnVal);
 } else {
 exit();
 }
@@ -484,7 +487,7 @@ function get_extension($file) {
  return $extension ? $extension : false;
 }
 
-function appendStckImgAudit($srvrConn,$trckName,$trckID,$trckFrmSrc,$trckDstSrc,$rsnVal) {
+function appendTrckSrcAudit($srvrConn,$trckName,$trckID,$trckFrmSrc,$trckDstSrc,$rsnVal) {
 
 //$imgDate = funcGetDateString();
 $trckDate = getCurrDateString();
@@ -493,14 +496,14 @@ $trckDate = getCurrDateString();
 //echo $imgSrcPath ."<br><br>";
 //echo $imgDate ."<br><br>";
 
-$dbX = "tracksrclog";
-$trckSrcID = fetchEntityMaxVal($srvrConn,$dbX);
+//$dbX = "tracksrclog";
+//$trckSrcID = fetchEntityMaxVal($srvrConn,$dbX);
 
 //$stmtSQL = "INSERT INTO tracksrclog (TrackSrcID,TrackID,TrackFromSrcPath,TrackDestSrcPath,Reason,UpdateDate) VALUES ";
 //$stmtSQL = $stmtSQL ."('" .$trckName ."','" .$trckID ."','" .$trckFrmSrc ."','" .$trckDstSrc ."','" .$rsnVal ."','" .$trckDate ."')";
 
 $stmtSQL = "INSERT INTO tracksrclog (TrackSrcID,TrackID,TrackFromSrcPath,TrackDestSrcPath,Reason,UpdateDate) VALUES ";
-$stmtSQL = $stmtSQL ."('" .$trckSrcID ."','" .$trckID ."','" .$trckFrmSrc ."','" .$trckDstSrc ."','" .$rsnVal ."','" .$trckDate ."')";
+$stmtSQL = $stmtSQL ."('" .$trckName ."','" .$trckID ."','" .$trckFrmSrc ."','" .$trckDstSrc ."','" .$rsnVal ."','" .$trckDate ."')";
 
 /*
 echo "<br><br>";
@@ -528,7 +531,13 @@ if(empty($_FILES['fileObj'])){
 
 //skip
 } else {
-funcBindVideoFileUpload($srvrConn);
+
+try {
+  funcBindVideoFileUpload($srvrConn);
+  } catch (RuntimeException $e) {
+      echo $e->getMessage();
+      exit();
+  }
 }
 
 funcBindInsertStmt($srvrConn);
@@ -547,7 +556,7 @@ mysqli_close($srvrConn);
       sessionStorage.clickcount = 0;
     } else {
       sessionStorage.clickcount = 0;
-    }
+  }
 
 //alert(sessionStorage.clickcount);
 //document.write(sessionStorage.clickcount + "<br><br>");

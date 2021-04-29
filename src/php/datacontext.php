@@ -310,13 +310,24 @@ divY.appendChild(elmntX);
 divX.appendChild(divY);
 
 var strFrm = "";
-
+    var result = parent.getCounter();
+    if (tranMode == 'append' || tranMode == "edit") {
+        if (result == 1 && dbX == 'videotrack') {
+            alert("Cannot append or edit more than one record at a time, due to server POST data limit, while uploading files");
+            closePopupFrm();
+        }
+    }
     if (tranMode == 'append') {
         showAppendnEditPopupDiv(tranMode,dbX,tblX,'1',divY);
     } else if (tranMode == 'edit') {
         showAppendnEditPopupDiv(tranMode,dbX,tblX,selIndx,divY);
     } else if (tranMode == 'delete') {
-        showDeletePopupDiv(dbX,tblX,selIndx,divY);
+        if (tblX.rows.length == 3) {
+            alert("Cannot delete, must have atleast one record for data maintainace");
+            closePopupFrm();
+        } else {
+            showDeletePopupDiv(dbX,tblX,selIndx,divY);
+        }
     }
 } // end func
 

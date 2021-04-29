@@ -52,9 +52,10 @@ divX.style.display = "none";
 var divY = document.getElementById("divUsrMnu");
 divY.style.display = "none";
 var tempX = document.getElementById("lblUsrName");
-
-var tempY = document.getElementById("spanUsr");
-tempY.innerHTML = "";
+var tempL = document.getElementById("lblGreet");
+tempL.style.display = "none";
+//var tempY = document.getElementById("spanUsr");
+//tempY.innerHTML = "";
 var tempZ = document.getElementById("mnuAdmin");
 tempZ.style.display = "none";
 var tempU = document.getElementById("mnuTrack");
@@ -80,10 +81,10 @@ if (arr[0] == "guest") {
 divX.style.display = "block";
 //tempX.value = arr[0];
 tempX.innerHTML = arr[0];
-strVal = arr[0].substr(0, 1).toUpperCase();
-tempY.innerHTML = strVal;
+//strVal = arr[0].substr(0, 1).toUpperCase();
+//tempY.innerHTML = strVal;
 tempU.style.display = "block";
-
+tempL.style.display = "block";
 if (arr[1] == "user") {
 //skip
 } else {
@@ -109,7 +110,9 @@ readContextData();
 function funcInit() {
 
 initLoadEvent();
-var strColor = "green";
+
+//var strColor = "green";
+var strColor = "red";
 toggleColorOnclick(strColor);
 
 if(typeof(Storage) !== "undefined") {

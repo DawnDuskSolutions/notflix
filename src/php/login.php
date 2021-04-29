@@ -8,7 +8,7 @@ $phpUsrPwd = $_POST['txtPwd'];
 $phpMnuVal = $_POST['txtPage'];
 
 //echo "Welcome Login:" .$phpUsrID ."<br><br>";
-//echo "Welcome Login:" .$phpUsrPWD ."<br><br>";
+//echo "Welcome Login:" .$phpUsrPwd ."<br><br>";
 
 $_GET['txtUsr'] = $phpUsrID;
 $_GET['txtPwd'] = $phpUsrPwd;

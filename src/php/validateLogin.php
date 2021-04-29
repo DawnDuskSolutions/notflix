@@ -137,19 +137,19 @@ function assingRSValue($rs) {
 $_SESSION['currUsrRS'] = $rs;
 } // end func
 
-$conn = connMySQL($servername,$username,$password,$schemaname);
 
-funcFetchLoginData($conn,$usrNameCol,$frmUsrID,$usrPwdCol,$frmUsrPwd,$usrTypeCol);
+	$conn = connMySQL($servername,$username,$password,$schemaname);
 
-$tsql2 = "Select COALESCE(MAX(" .$auditArr[1] ."),0) as " .$auditArr[1] ." from " .$auditArr[0];
-//echo $tsql2;
-$maxVal = fetchEntityMAXIDQuery($conn,$tsql2,$auditArr[1]);
-//autogenkeycol and prefix concat
-$auditDBMaxVal = generateMAXID($auditArr[3],$maxVal,"NA","NA");
-//echo "MAX - Code - AuditLog :" .$auditDBMaxVal;
+	funcFetchLoginData($conn,$usrNameCol,$frmUsrID,$usrPwdCol,$frmUsrPwd,$usrTypeCol);
 
-mysqli_close($conn);
+	$tsql2 = "Select COALESCE(MAX(" .$auditArr[1] ."),0) as " .$auditArr[1] ." from " .$auditArr[0];
+	//echo $tsql2;
+	$maxVal = fetchEntityMAXIDQuery($conn,$tsql2,$auditArr[1]);
+	//autogenkeycol and prefix concat
+	$auditDBMaxVal = generateMAXID($auditArr[3],$maxVal,"NA","NA");
+	//echo "MAX - Code - AuditLog :" .$auditDBMaxVal;
 
+	mysqli_close($conn);
 ?>
 
 <script>

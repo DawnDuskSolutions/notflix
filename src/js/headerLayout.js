@@ -18,25 +18,16 @@ hdrElmntDef = hdrElmntDef + "||" + "divClr|spanSep03|span";
 hdrElmntDef = hdrElmntDef + "||" + "hdrCol01|divText|div";
 hdrElmntDef = hdrElmntDef + "||" + "divText|lblTxt|label";
 
-hdrElmntDef = hdrElmntDef + "||" + "hdrCol02|lblDisp02|label";
-
+hdrElmntDef = hdrElmntDef + "||" + "hdrCol02|lblGreet|label";
 
 hdrElmntDef = hdrElmntDef + "||" + "hdrCol03|divUsr|div";
-hdrElmntDef = hdrElmntDef + "||" + "divUsr|spanUsr|span";
+//hdrElmntDef = hdrElmntDef + "||" + "divUsr|spanUsr|span";
 hdrElmntDef = hdrElmntDef + "||" + "divUsr|lblUsrName|label";
 //hdrElmntDef = hdrElmntDef + "||" + "divUsr|lblUsrName|input";
 hdrElmntDef = hdrElmntDef + "||" + "divUsr|lblUsrType|input";
 hdrElmntDef = hdrElmntDef + "||" + "divUsr|lblUsrID|input";
 hdrElmntDef = hdrElmntDef + "||" + "divUsr|lblLogID|input";
 hdrElmntDef = hdrElmntDef + "||" + "divUsr|lblUsrPwd|input";
-
-hdrElmntDef = hdrElmntDef + "||" + "hdrCol03|divUsrMnu|div";
-hdrElmntDef = hdrElmntDef + "||" + "divUsrMnu|usrAcctMnu|button";
-hdrElmntDef = hdrElmntDef + "||" + "divUsrMnu|usrSep01|br";
-hdrElmntDef = hdrElmntDef + "||" + "divUsrMnu|usrChgPwdMnu|button";
-hdrElmntDef = hdrElmntDef + "||" + "divUsrMnu|usrSep02|br";
-hdrElmntDef = hdrElmntDef + "||" + "divUsrMnu|usrLogout|button";
-
 
 var hdrAttrDef = "";
 hdrAttrDef = "hdrCol01|colSpan|1;";
@@ -45,36 +36,33 @@ hdrAttrDef = hdrAttrDef + "||" + "hdrCol01|style|position:relative;width:10%;pad
 //hdrAttrDef = hdrAttrDef + "||" + "hdrCol01|onmouseleave|hideToggleClrToolTip()";
 
 hdrAttrDef = hdrAttrDef + "||" + "hdrCol02|colSpan|1";
-hdrAttrDef = hdrAttrDef + "||" + "hdrCol02|style|width:65%;padding-top:10px;padding-bottom:10px;text-align:center;";
+hdrAttrDef = hdrAttrDef + "||" + "hdrCol02|style|width:75%;padding-top:10px;padding-bottom:10px;text-align:center;";
 
 hdrAttrDef = hdrAttrDef + "||" + "hdrCol03|colSpan|3";
-hdrAttrDef = hdrAttrDef + "||" + "hdrCol03|style|position:relative;width:20%;padding-top:10px;padding-bottom:10px;text-align:center;";
-hdrAttrDef = hdrAttrDef + "||" + "hdrCol03|onmouseleave|callHideUsrAcctMenu()";
-hdrAttrDef = hdrAttrDef + "||" + "hdrCol03|onmouseover|callShowUsrAcctMenu()";
+hdrAttrDef = hdrAttrDef + "||" + "hdrCol03|style|width:15%;";
 
-hdrAttrDef = hdrAttrDef + "||" + "lblDisp01|innerHTML|&nbsp;&nbsp;";
+hdrAttrDef = hdrAttrDef + "||" + "lblGreet|innerHTML|Welcome";
 
 hdrAttrDef = hdrAttrDef + "||" + "divText|style|position:absolute;margin:5px;width:150px;padding:5px;z-index:1;display:none;background-color:#e6f5ff;border-radius:5px;";
 hdrAttrDef = hdrAttrDef + "||" + "lblTxt|innerHTML|Click to toggle color";
 
 hdrAttrDef = hdrAttrDef + "||" + "spanSep01|innerHTML|&nbsp;";
-hdrAttrDef = hdrAttrDef + "||" + "btnBlue|style|border-radius:50%;background-color:#0099ff;outline:none;border:none;";
+hdrAttrDef = hdrAttrDef + "||" + "btnBlue|style|border-radius:50%;background-color:#0099ff;outline:none;border:none;display:none;";
 //hdrAttrDef = hdrAttrDef + "||" + "btnBlue|onclick|toggleColorOnclick('blue')";
 
 hdrAttrDef = hdrAttrDef + "||" + "spanSep02|innerHTML|&nbsp;";
-hdrAttrDef = hdrAttrDef + "||" + "btnGrey|style|border-radius:50%;background-color:#669999;outline:none;border:none;";
+hdrAttrDef = hdrAttrDef + "||" + "btnGreen|style|border-radius:50%;background-color:#669999;outline:none;border:none;display:none;";
 //hdrAttrDef = hdrAttrDef + "||" + "btnGrey|onclick|toggleColorOnclick('grey')";
 
 hdrAttrDef = hdrAttrDef + "||" + "spanSep03|innerHTML|&nbsp;";
 
-hdrAttrDef = hdrAttrDef + "||" + "lblDisp02|style|font-size:18px;";
-hdrAttrDef = hdrAttrDef + "||" + "lblDisp02|innerHTML|&nbsp;";
-
 hdrAttrDef = hdrAttrDef + "||" + "divUsr|style|height:30px;padding-left:20px;background-color:transparent;border-radius:25px;display:none;";
-hdrAttrDef = hdrAttrDef + "||" + "spanUsr|class|circle";
+//hdrAttrDef = hdrAttrDef + "||" + "spanUsr|class|circle";
 //hdrAttrDef = hdrAttrDef + "||" + "lblUsrName|style|float:left;padding-top:5px;padding-left:10px;border:none;outline:none;background:transparent;";
-hdrAttrDef = hdrAttrDef + "||" + "lblUsrName|style|float:left;padding-top:5px;padding-left:10px;";
+hdrAttrDef = hdrAttrDef + "||" + "lblGreet|style|float:right;font-size:18px;padding-top:5px;padding-left:10px;display:none;";
+hdrAttrDef = hdrAttrDef + "||" + "lblUsrName|style|float:left;font-size:18px;padding-top:5px;padding-left:10px;";
 hdrAttrDef = hdrAttrDef + "||" + "lblUsrType|style|float:left;padding-top:5px;padding-left:10px;";
+hdrAttrDef = hdrAttrDef + "||" + "lblGreet|innerHTML|Welcome";
 //hdrAttrDef = hdrAttrDef + "||" + "lblUsrName|innerHTML|hello";
 //hdrAttrDef = hdrAttrDef + "||" + "lblUsrName|innerHTML|hello";
 hdrAttrDef = hdrAttrDef + "||" + "lblUsrID|type|text";
@@ -84,15 +72,6 @@ hdrAttrDef = hdrAttrDef + "||" + "lblUsrType|type|hidden";
 hdrAttrDef = hdrAttrDef + "||" + "lblLogID|type|hidden";
 hdrAttrDef = hdrAttrDef + "||" + "lblUsrPwd|type|hidden";
 hdrAttrDef = hdrAttrDef + "||" + "lblUsrType|onchange|onUserChanged()";
-
-hdrAttrDef = hdrAttrDef + "||" + "divUsrMnu|class|clsMnuCnt";
-hdrAttrDef = hdrAttrDef + "||" + "usrAcctMnu|onclick|funcShowLoginFrm('usracct')";
-hdrAttrDef = hdrAttrDef + "||" + "usrChgPwdMnu|onclick|funcShowLoginFrm('usrchgpwd')";
-hdrAttrDef = hdrAttrDef + "||" + "usrLogout|onclick|onUserLogoutClick()";
-
-hdrAttrDef = hdrAttrDef + "||" + "usrAcctMnu|innerHTML|PROFILE";
-hdrAttrDef = hdrAttrDef + "||" + "usrChgPwdMnu|innerHTML|CHANGE PASSWORD";
-hdrAttrDef = hdrAttrDef + "||" + "usrLogout|innerHTML|LOGOUT";
 
 //hdrAttrDef = hdrAttrDef + "||" + "lblDisp03|innerHTML|&nbsp;&nbsp;&nbsp;";
 
@@ -149,6 +128,7 @@ function callShowUsrAcctMenu() {
 tempX = document.getElementById("divUsr");
 if (tempX.style.display == "block") {
 var tempY = document.getElementById("divUsrMnu");
+tempY.style.width = "200px";
 tempY.style.display = "block";
 }
 } // end func

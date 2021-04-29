@@ -19,9 +19,18 @@ mnuElmntDef = mnuElmntDef + "||" + "mnuCol04|mnuHome|button";
 
 mnuElmntDef = mnuElmntDef + "||" + "mnuCol05|mnuLogin|img";
 
+mnuElmntDef = mnuElmntDef + "||" + "mnuCol05|divUsrMnu|div";
+mnuElmntDef = mnuElmntDef + "||" + "divUsrMnu|usrAcctMnu|button";
+mnuElmntDef = mnuElmntDef + "||" + "divUsrMnu|usrSep01|br";
+mnuElmntDef = mnuElmntDef + "||" + "divUsrMnu|usrChgPwdMnu|button";
+mnuElmntDef = mnuElmntDef + "||" + "divUsrMnu|usrSep02|br";
+mnuElmntDef = mnuElmntDef + "||" + "divUsrMnu|usrLogout|button";
+
 mnuElmntDef = mnuElmntDef + "||" + "mnuCol06|mnuTrack|img";
+//mnuElmntDef = mnuElmntDef + "||" + "mnuCol06|mnuAdmin|img";
 
 mnuElmntDef = mnuElmntDef + "||" + "mnuCol07|mnuAdmin|img";
+//mnuElmntDef = mnuElmntDef + "||" + "mnuCol07|mnuTrack|img";
 
 mnuElmntDef = mnuElmntDef + "||" + "mnuCol07|divAdmin|div";
 mnuElmntDef = mnuElmntDef + "||" + "divAdmin|mnuUserAdm|button";
@@ -34,25 +43,28 @@ mnuElmntDef = mnuElmntDef + "||" + "divAdmin|adminSep02|br";
 //bind mnuRow elmnt attributes
 mnuAttrDef = "mnuCol01|colspan|1";
 
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol01|style|width:10%;text-align:center;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol01|style|width:2%;text-align:center;";
 
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol02|style|width:4%;"; //background-color: cyan;";
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol03|style|width:46%;"; //background-color: cyan;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol02|style|width:6%;"; //background-color: cyan;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol03|style|width:68%;"; //background-color: cyan;";
 
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol04|style|width:10%;"; //background-color:lightgrey;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol04|style|width:5%;"; //background-color:lightgrey;";
 
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol05|style|width:10%;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol05|style|position:relative;width:5%;padding-top:10px;padding-bottom:10px;text-align:center;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol05|onmouseleave|callHideUsrAcctMenu()";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol05|onmouseover|callShowUsrAcctMenu()";
 
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol06|style|width:10%;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol06|style|width:4%;";
 mnuAttrDef = mnuAttrDef + "||" + "mnuCol06|onmouseleave|callHidePopupMenu('Track')";
 mnuAttrDef = mnuAttrDef + "||" + "mnuCol06|onmouseover|callShowPopupMenu('Track')";
 
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol07|style|width:10%;";
-
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol07|style|width:10%;position:relative;text-align:center;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol07|style|width:15%;position:relative;text-align:left;";
 mnuAttrDef = mnuAttrDef + "||" + "mnuCol07|onmouseleave|callHidePopupMenu('Admin')";
 mnuAttrDef = mnuAttrDef + "||" + "mnuCol07|onmouseover|callShowPopupMenu('Admin')";
+
 mnuAttrDef = mnuAttrDef + "||" + "divAdmin|class|clsMnuCnt";
+
+//mnuAttrDef = mnuAttrDef + "||" + "mnuCol07|style|width:6%;";
 
 mnuAttrDef = mnuAttrDef + "||" + "mnuLbl01|innerHTML|&nbsp;";
 
@@ -69,6 +81,16 @@ mnuAttrDef = mnuAttrDef + "||" + "mnuHome|onclick|onHomeBtnClick()";
 mnuAttrDef = mnuAttrDef + "||" + "mnuLogin|alt|Login";
 mnuAttrDef = mnuAttrDef + "||" + "mnuLogin|src|image-icn/login-icn.png";
 mnuAttrDef = mnuAttrDef + "||" + "mnuLogin|onclick|funcShowLoginFrm('login')";
+
+mnuAttrDef = mnuAttrDef + "||" + "divUsrMnu|class|clsMnuCnt";
+mnuAttrDef = mnuAttrDef + "||" + "usrAcctMnu|onclick|funcShowLoginFrm('usracct')";
+mnuAttrDef = mnuAttrDef + "||" + "usrChgPwdMnu|onclick|funcShowLoginFrm('usrchgpwd')";
+mnuAttrDef = mnuAttrDef + "||" + "usrLogout|onclick|onUserLogoutClick()";
+
+mnuAttrDef = mnuAttrDef + "||" + "usrAcctMnu|innerHTML|PROFILE";
+mnuAttrDef = mnuAttrDef + "||" + "usrChgPwdMnu|style|text-align:left;";
+mnuAttrDef = mnuAttrDef + "||" + "usrChgPwdMnu|innerHTML|CHANGE PASSWORD";
+mnuAttrDef = mnuAttrDef + "||" + "usrLogout|innerHTML|LOGOUT";
 
 //mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|innerHTML|TRACK";
 mnuAttrDef = mnuAttrDef + "||" + "mnuTrack|alt|Track";
