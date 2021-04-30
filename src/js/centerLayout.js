@@ -31,52 +31,56 @@ imgAttrDef = imgAttrDef + "||" + "lnkNext|onclick|displayImg(lnkNext)";
 
 //imgAttrDef = imgAttrDef + "||" + "imgDisp|src|images/img-srcFiles/img01.jpg";
 imgAttrDef = imgAttrDef + "||" + "imgDisp|alt|imageDisplay";
-imgAttrDef = imgAttrDef + "||" + "imgDisp|style|width:100%;height:500px;display:block;text-align:center;";
+imgAttrDef = imgAttrDef + "||" + "imgDisp|style|width:100%;height:1000px;display:block;text-align:center;";
 
 var imgArr = {
- 1: {imgID:"img01",imgCode:"1",imgSrc:"images/img07.jpg",imgCaption:"Image 1",currImg:"NA"},
- 2: {imgID:"img02",imgCode:"2",imgSrc:"images/img06.jpg",imgCaption:"Image 2",currImg:"NA"},
+ 1: {imgID:"img01",imgCode:"1",imgSrc:"images/img01.jpg",imgCaption:"Image 1",currImg:"NA"},
+ 2: {imgID:"img02",imgCode:"2",imgSrc:"images/img07.jpg",imgCaption:"Image 2",currImg:"NA"},
  3: {imgID:"img03",imgCode:"3",imgSrc:"images/img08.jpg",imgCaption:"Image 3",currImg:"NA"},
 };
 
 
 function displayImg(elmntX) {
-
-var imgIndx = null;
-
-imgIndx = eval(getCurrentImgCode());
-if (elmntX.id == "lnkPrev") {
-if (imgIndx == 1) {
-imgIndx = Object.keys(imgArr).length;
-} else {
-imgIndx = imgIndx - 1;
-}
-
-} else if (elmntX.id == "lnkNext") {
-if (imgIndx == Object.keys(imgArr).length) {
-imgIndx = 1;
-} else {
-imgIndx = imgIndx + 1;
-}
-} else {
-//skip
-}
-
-showSlides(imgIndx);
-
+    var imgIndx = null;
+    imgIndx = eval(getCurrentImgCode());
+    if (elmntX.id == "lnkPrev") {
+        if (imgIndx == 1) {
+            imgIndx = Object.keys(imgArr).length;
+        } else {
+            imgIndx = imgIndx - 1;
+        }
+    } else if (elmntX.id == "lnkNext") {
+        if (imgIndx == Object.keys(imgArr).length) {
+            imgIndx = 1;
+        } else {
+            imgIndx = imgIndx + 1;
+        }
+    } else {
+        //skip
+    }
+    showSlides(imgIndx);
 }// end func
 
 
 function showSlides(imgCode) {
 
+tmpX = document.getElementById("lnkPrev");
+tmpY = document.getElementById("lnkNext");
+
 //alert(Object.keys(imgArr).length);
 if (imgCode == "" || imgCode == null || imgCode == undefined) {
 imgCode = "1";
 } else if (imgCode > Object.keys(imgArr).length) {
-imgCode = "1";
-//alert("image : " + imgCode);
+    imgCode = "1";
+    //alert("image : " + imgCode);
+} else if (Object.keys(imgArr).length == 1) {
+  //skip
+  tmpX.style.display = "none";
+  tmpY.style.display = "none";
 } else {
-//skip
+  //skip
+  tmpX.style.display = "block";
+  tmpY.style.display = "block";
 }
 
 //alert("image : " + imgCode);
@@ -132,7 +136,7 @@ bindElmntDef(2,imgElmntDef);
 
 bindElmntAttrRule(2,imgAttrDef);
 
-showSlides(2);
+showSlides(1);
 
 //func_bindNavNodesToImg(Object.keys(imgArr).length);
 

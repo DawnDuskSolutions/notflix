@@ -45,8 +45,8 @@ mnuAttrDef = "mnuCol01|colspan|1";
 
 mnuAttrDef = mnuAttrDef + "||" + "mnuCol01|style|width:2%;text-align:center;";
 
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol02|style|width:6%;"; //background-color: cyan;";
-mnuAttrDef = mnuAttrDef + "||" + "mnuCol03|style|width:68%;"; //background-color: cyan;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol02|style|width:4%;"; //background-color: cyan;";
+mnuAttrDef = mnuAttrDef + "||" + "mnuCol03|style|width:70%;"; //background-color: cyan;";
 
 mnuAttrDef = mnuAttrDef + "||" + "mnuCol04|style|width:5%;"; //background-color:lightgrey;";
 

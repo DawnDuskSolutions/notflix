@@ -103,7 +103,7 @@ $arr = "";
 $rowID = 0;
 
 if ($cnt == 0) { 
-//skip
+	echo "";
 } else {
     //echo var_dump($tracktranArr) . "<br>";
 
@@ -144,7 +144,7 @@ if ($cnt == 0) {
 
             echo "<td>" .$tranID ."</td>";
 
-	    echo "<td>" .$tranTrckID ."</td>";
+	    	echo "<td>" .$tranTrckID ."</td>";
 
             echo "<td>" .$tranCurrTime ."</td>";
 
