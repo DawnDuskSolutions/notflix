@@ -71,3 +71,10 @@ CREATE TABLE `videotrack` (
   UNIQUE KEY `TrackID_UNIQUE` (`TrackID`),
   UNIQUE KEY `ID_UNIQUE` (`VideoID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `trantrack` (
+  `UserAcctID` VARCHAR(50) NOT NULL, 
+  `TranID` VARCHAR(50) NOT NULL, 
+  `TranTrackID` VARCHAR(20) NOT NULL, 
+  `TranCurrTime` VARCHAR(20) NOt NULL
+);

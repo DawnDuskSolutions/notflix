@@ -78,7 +78,7 @@ $dbColArr = explode($GLOBALS['dlmtr2'],$trantrckArr[1]);
 
 $conn = connMySQL($servername,$username,$password,$schemaname);
 
-$tsql = "Select * from " .$dbX;
+$tsql = "SELECT * FROM " .$dbX;
 //echo "<br><br>" .$tsql ."<br><br>";
 
 $resultSet1 = fetchEntityResultSet($conn,$tsql);
@@ -90,7 +90,7 @@ $cnt = count($dbColArr);
 
 if (mysqli_num_rows($resultSet1) > 0) {
 	/*
-	echo "<table style='display:none;'>";
+	echo "<table style='display:block;'>";
 	for($i=0;$i<$cnt;$i++) {
 		echo "<td>" .$dbColArr[$i] ."</td>";
 	}
@@ -98,7 +98,7 @@ if (mysqli_num_rows($resultSet1) > 0) {
 
 	while($row = mysqli_fetch_assoc($resultSet1)) {
 
-		if ($TrackID == $row['TranTrackID']) {
+		if ($UsrID == $row['UserAcctID'] && $TrackID == $row['TranTrackID']) {
 			//echo "<tr style='background:white;'>";
 			$timeArr = explode("/",$row['TranCurrTime']);
             $currTimeVal = $timeArr[0];
@@ -107,13 +107,13 @@ if (mysqli_num_rows($resultSet1) > 0) {
 			//echo "<tr>";
 		}
 
-		/*
+		
 		for($j=0;$j<$cnt;$j++) {
 			$colName = $dbColArr[$j];
-			echo "<td>" .$row[$colName] ."</td>";			
+			//echo "<td>" .$row[$colName] ."</td>";			
 		}
-		echo "</tr>";
-		*/
+		//echo "</tr>";
+		
 	}
 	
 	//echo "</table>";
@@ -202,6 +202,7 @@ function intializePlayer() {
 	vid.addEventListener("click",playPause,false);
 	vid.addEventListener("play",playPause,false);
 	vid.addEventListener("pause",playPause,false);
+	//vid.addEventListener('seeking',playPause,false);
 
 	vid.currentTime = currTimeVal;
 
@@ -228,11 +229,11 @@ function playPause() {
 trckStatus = "";
 txtcurtime.value = formatTime(vid.currentTime);
 txtdurtime.value = formatTime(vid.duration);
-
+//alert(vid.seeking);
 if (vid.paused) {
-trckStatus = "Pause"
+	trckStatus = "Pause";
 } else {
-trckStatus = "Play";
+    trckStatus = "Play";
 }
 
 if (txtcurtime.value == txtdurtime.value) {

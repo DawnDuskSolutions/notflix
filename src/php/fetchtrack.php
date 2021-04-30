@@ -84,7 +84,7 @@ for($i=0;$i<$cnt;$i++) {
 }
 
 $tsql = $tsql ." VALUES (";
-$tsql = $tsql ."'" .$row['TranID']	."','" .$row['TrackID'] ."','" .$row['TrackCurrTime'] ."')";
+$tsql = $tsql ."'" .$GLOBALS['txtUsrID'] ."','" .$row['TranID']	."','" .$row['TrackID'] ."','" .$row['TrackCurrTime'] ."')";
 
 $stmtSQL = $tsql;
 

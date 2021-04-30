@@ -67,7 +67,7 @@ $trackAuditCrdn = "TrackLog|audittran|TranID|TranID|TRAN|Delete||TranID~TranID~r
 
 $trackSrchCrdn = "audittran|TranID|UserAcctID|TrackID";
 
-$tranTrackCrdn = "trantrack||TranID|TranTrackID|TranCurrTime";
+$tranTrackCrdn = "trantrack||UserAcctID|TranID|TranTrackID|TranCurrTime";
 
 function siteURL()
 {

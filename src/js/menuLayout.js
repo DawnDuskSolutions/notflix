@@ -112,23 +112,31 @@ mnuAttrDef = mnuAttrDef + "||" + "mnuAdmin|src|image-icn/admin-icn.png";
 mnuAttrDef = mnuAttrDef + "||" + "mnuAdmin|style|border-radius:50%";
 
 
-function callHidePopupMenu(mnuClicked) {
+function callHidePopupMenu(mnuVal) {
 var tempX = "";
-if (mnuClicked == "Admin") {
-tempX = document.getElementById("divAdmin");
-funcHideAdminMenu(tempX);
+var tmpX = document.getElementById("mnuAdmin");
+
+if (mnuVal == "Admin") {
+    tempX = document.getElementById("divAdmin");
+    funcHideAdminMenu(tempX);
 } else {
-//skip
+    //skip
 }
 }
 
-function callShowPopupMenu(mnuClicked) {
+function callShowPopupMenu(mnuVal) {
 var divX = "";
-if (mnuClicked == "Admin") {
-divX = document.getElementById("divAdmin");
-funcShowAdminMenu(divX);
+var tmpX = document.getElementById("mnuAdmin");
+
+if (tmpX.style.display == "none") {
+    //skip
 } else {
-//skip
+    if (mnuVal == "Admin") {
+        divX = document.getElementById("divAdmin");
+        funcShowAdminMenu(divX);
+    } else {
+    //skip
+    }
 }
 }
 

@@ -209,7 +209,8 @@ node.setAttribute("id", nodeID);
 tempX = document.getElementById(parentID);
 
 if (tempX == null || tempX == undefined) {
-alert("invalid object");
+//alert("invalid object");
+alert("invalid object - " + parentID + " - node - " + nodeName);
 } else {
 
 tempX.appendChild(node);
