@@ -53,6 +53,7 @@ var divY = document.getElementById("divUsrMnu");
 divY.style.display = "none";
 var tempX = document.getElementById("lblUsrName");
 var tempL = document.getElementById("lblGreet");
+//alert(tempL);
 tempL.style.display = "none";
 //var tempY = document.getElementById("spanUsr");
 //tempY.innerHTML = "";
