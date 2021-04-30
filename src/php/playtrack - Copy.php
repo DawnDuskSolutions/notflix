@@ -71,63 +71,105 @@ echo "<br><br>" .$tranArr[0] ."<br><br>";
 echo "<br><br>" .$tranArr[1] ."<br><br>";
 */
 
-$trantrckArr = explode($GLOBALS['dlmtr1'],$GLOBALS['tranTrackCrdn']);
+$tracktranArr = [];
+//echo "testing<br>";
 
-$dbX = $trantrckArr[0];
-$dbColArr = explode($GLOBALS['dlmtr2'],$trantrckArr[1]);
+//$filename = '/path/to/foo.txt';
 
-$conn = connMySQL($servername,$username,$password,$schemaname);
+if (file_exists($tranlogfile)) {
+    //echo "The file $tranlogfile exists";
 
-$tsql = "Select * from " .$dbX;
-//echo "<br><br>" .$tsql ."<br><br>";
+    //Retrieve the serialized string from file.
+   $fileContents = file_get_contents($tranlogfile);
 
-$resultSet1 = fetchEntityResultSet($conn,$tsql);
+   //Unserialize the string back into an array.
+   $tracktranArr = unserialize($fileContents);
 
-//echo mysqli_num_rows($resultSet1);
-//echo "<br><br>";
+   //End result.
+   //var_dump($tracktranArr);
 
-$cnt = count($dbColArr);
-
-if (mysqli_num_rows($resultSet1) > 0) {
-	/*
-	echo "<table style='display:none;'>";
-	for($i=0;$i<$cnt;$i++) {
-		echo "<td>" .$dbColArr[$i] ."</td>";
-	}
-	*/
-
-	while($row = mysqli_fetch_assoc($resultSet1)) {
-
-		if ($TrackID == $row['TranTrackID']) {
-			//echo "<tr style='background:white;'>";
-			$timeArr = explode("/",$row['TranCurrTime']);
-            $currTimeVal = $timeArr[0];
-            $durTimeVal = $timeArr[1];
-		} else {
-			//echo "<tr>";
-		}
-
-		/*
-		for($j=0;$j<$cnt;$j++) {
-			$colName = $dbColArr[$j];
-			echo "<td>" .$row[$colName] ."</td>";			
-		}
-		echo "</tr>";
-		*/
-	}
-	
-	//echo "</table>";
-    $stmtSQL = "TRUNCATE " .$dbX;
-
-	//echo $stmtSQL;
-	//echo "<br><br>";
-	
-	funcEntityInsertQuery($conn,$stmtSQL);
+   if (unlink($GLOBALS['tranlogfile'])) {
+	//echo "delete file successful";
+   } else {
+  	//echo "delete file unsuccessful";
+   }
 } else {
-	//echo "no rows fetched";
+    //echo "The file $tranlogfile does not exist";
 }
 
-mysqli_close($conn);
+$cnt = count($tracktranArr);
+$tmpArr = "";
+$arr = "";
+$rowID = 0;
+
+if ($cnt == 0) { 
+	echo "";
+} else {
+    //echo var_dump($tracktranArr) . "<br>";
+
+    echo "<table style='display:none;'>";
+
+    for ($i=0;$i<$cnt;$i++) {
+	$tmpArr = $tracktranArr[$i];
+
+        $tranArr = explode($dlmtr2,$tmpArr);
+
+        $arr = explode($dlmtr3,$tranArr[0]);
+        $tranID = $arr[1];
+
+        $arr = explode($dlmtr3,$tranArr[1]);
+        $tranTrckID = $arr[1];
+
+        $arr = explode($dlmtr3,$tranArr[2]);
+        $tranCurrTime = $arr[1];
+
+/*
+        if ($TrackID == $tranTrckID) {
+            $timeArr = explode("/",$tranCurrTime);
+	    $currTimeVal = $timeArr[0];
+	    $durTimeVal = $timeArr[1];
+	} else {
+	    //skip
+	}
+*/
+
+	$rowID = $rowID+1;
+
+	if ($TrackID == $tranTrckID) {
+	    echo "<tr style='background:white;'>";
+
+	    echo "<td>" .$rowID ."</td>";
+
+            echo "<td>" .$TrackID ."</td>";
+
+            echo "<td>" .$tranID ."</td>";
+
+	    	echo "<td>" .$tranTrckID ."</td>";
+
+            echo "<td>" .$tranCurrTime ."</td>";
+
+            echo "</tr>";
+            $timeArr = explode("/",$tranCurrTime);
+            $currTimeVal = $timeArr[0];
+            $durTimeVal = $timeArr[1];
+	} else {
+            echo "<tr>";
+
+	    echo "<td>" .$rowID ."</td>";
+
+	    echo "<td>" .$TrackID ."</td>";
+
+            echo "<td>" .$tranID ."</td>";
+
+	    echo "<td>" .$tranTrckID ."</td>";
+
+            echo "<td>" .$tranCurrTime ."</td>";
+
+	    echo "</tr>";
+	}
+    }
+    echo "</table>";
+}
 
 /*
 echo "<br><br>" .$TrackID ."<br><br>";

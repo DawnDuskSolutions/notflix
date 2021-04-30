@@ -38,17 +38,11 @@ echo $srchCol3;
 echo "<br><br>";
 */
 
-
 function fetchTrackTranData($srvrConn,$srchUsrID) {
 
 $valX = "";
 $currIndx = 0;
 $txtTranArr = [];
-
-$trantrckArr = explode($GLOBALS['dlmtr1'],$GLOBALS['tranTrackCrdn']);
-
-$dbX = $trantrckArr[0];
-$dbColArr = explode($GLOBALS['dlmtr2'],$trantrckArr[1]);
 
 $tsql = "SELECT TranID, TrackID ,InteractionPoint As TrackCurrTime FROM " .$GLOBALS['tmpdbName'] ." WHERE " .$GLOBALS['srchCol1'] ;
 $tsql = $tsql ." IN (SELECT max(TranID) FROM ".$GLOBALS['tmpdbName'] ." where " .$GLOBALS['srchCol2'] ." = '" .$srchUsrID ."' GROUP BY UserAcctID, TrackID)";
@@ -63,45 +57,21 @@ if (mysqli_num_rows($resultSet) > 0) {
 
 while($row = mysqli_fetch_assoc($resultSet)) {
 
-//$txtTranArr[$currIndx] = "tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
+$txtTranArr[$currIndx] = "tranID~" .$row['TranID'] ."|" ."tranTrckID~" .$row['TrackID'] ."|" ."txtTrckCurrTime~" .$row['TrackCurrTime'];
 
 //echo $txtTranArr[$currIndx] ."<br<br>";
 
-//$currIndx = $currIndx + 1;
-
-$cnt = count($dbColArr);
-
-//TranID,TranTrackID,TranCurrTime
-$tsql = "";
-$tsql = "INSERT INTO" ." " .$dbX ." (";
-
-for($i=0;$i<$cnt;$i++) {
-	if ($i<($cnt-1)) {
-		$tsql = $tsql .$dbColArr[$i] .",";
-	} else {
-		$tsql = $tsql .$dbColArr[$i] .")";
-	}	 
-}
-
-$tsql = $tsql ." VALUES (";
-$tsql = $tsql ."'" .$row['TranID']	."','" .$row['TrackID'] ."','" .$row['TrackCurrTime'] ."')";
-
-$stmtSQL = $tsql;
-
-//echo $stmtSQL;
-//echo "<br><br>";
-
-funcEntityInsertQuery($srvrConn,$stmtSQL);
+$currIndx = $currIndx + 1;
 
 } //end while
 
-/*
+//echo $valX;
+
 //serialize the array and store in a file
 $serialized = serialize($txtTranArr);
 
 //Save the serialized array to a text file.
 file_put_contents($GLOBALS['tranlogfile'], $serialized);
-*/
 
 } else {
 //echo "Query fetched 0 rows <br>";

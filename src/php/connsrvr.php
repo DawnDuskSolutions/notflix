@@ -64,7 +64,10 @@ $auditCrdn = "AuditLog|auditlog|LogID|AuditLogID|LOG|Delete||Code~AuditLogID~rea
 
 //TrackAudit table credentials
 $trackAuditCrdn = "TrackLog|audittran|TranID|TranID|TRAN|Delete||TranID~TranID~readonly~NA|UserAcctID~UserAcctID~readonly~NA|UserName~UserName~readonly~NA|TitleID~TrackID~readonly~NA|UserAction~UserAction~readonly~NA|InteractionPoint~InteractionPoint~readonly~NA|InteractionType~InteractionType~readonly~NA";
+
 $trackSrchCrdn = "audittran|TranID|UserAcctID|TrackID";
+
+$tranTrackCrdn = "trantrack||TranID|TranTrackID|TranCurrTime";
 
 function siteURL()
 {
@@ -189,7 +192,7 @@ mysqli_query($srvrConn, "use notflix;");
 
 if (mysqli_query($srvrConn, $tsql)) {
   //echo "New record created successfully";
-    echo "Submission successful";
+    //echo "Submission successful";
 } else {
     echo "Submission unsuccessful: " . $tsql . "<br>" . mysqli_error($srvrConn);
 } // if
