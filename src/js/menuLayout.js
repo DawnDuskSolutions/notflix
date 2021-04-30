@@ -73,7 +73,7 @@ mnuAttrDef = mnuAttrDef + "||" + "imgLogo|src|image-icn/logo-icn.png";
 mnuAttrDef = mnuAttrDef + "||" + "imgLogo|style|width:40px;height:40px;border-radius:50%;";
 
 mnuAttrDef = mnuAttrDef + "||" + "logoLbl|style|font-size:20px;";
-mnuAttrDef = mnuAttrDef + "||" + "logoLbl|innerHTML|NotFLIX";
+mnuAttrDef = mnuAttrDef + "||" + "logoLbl|innerHTML|NotFlix";
 
 mnuAttrDef = mnuAttrDef + "||" + "mnuHome|innerHTML|HOME";
 mnuAttrDef = mnuAttrDef + "||" + "mnuHome|onclick|onHomeBtnClick()";

@@ -8,7 +8,7 @@
 
 Project status: working/prototype.
 
-NotFLIX - cloud based video streaming service. NotFLIX is created to be an open source solution for streaming live video, right into the web browser using the HTML5 video tag.
+NotFlix - cloud based video streaming service. NotFLIX is created to be an open source solution for streaming live video, right into the web browser using the HTML5 video tag.
 
 The current version is a working prototype, which showcases the main ideas. The main design goal is low resource usage, build a proof-of-concept cloud application and NotFlix would gain insights into how their users are interacting with content e.g pause, play, stop etc. Additionally, the analytics team can extract data into their analytic platform using a secure connection. 
 
@@ -30,7 +30,13 @@ Instructios will guide to setup working environment for development and testing 
 
 1.  Initially you should have administrator privileges, to setup the environment
 
-2.  Install a web server on your development environment, and then install PHP and MySQL
+2.  Install a web server on your development environment, and then install PHP and MySQL using docker file
+
+    ```
+    docker build .
+    docker images
+    docker ps
+    ```
 
 3. Configure your server to deploy PHP files. Create your .php files, place them in your web directory, and    the server will automatically parse them for you.
 
