@@ -457,7 +457,8 @@ if ($uploadOk == 0) {
     $uploadOk = 0;
     echo "Sorry, there was an error uploading your file.";
     echo "<br> <br>";
-    echo "error : " .$_FILES['userfile']['error'];
+    echo "error : " .$_FILES['fileObj']['error'];
+    echo "<br> <br>";
     exit();
   }
 }

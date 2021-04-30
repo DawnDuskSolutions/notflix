@@ -2,7 +2,7 @@
 <html>
 <head>
 
-<title> NotFLIX - Video Streaming Cloud Solution</title>
+<title> NotFlix - Video Streaming Cloud Solution</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
 <meta name="viewport" content="width=device-width, initial-scale=1">

@@ -128,9 +128,9 @@ echo "<br><br>";
 
 
 function fetchTrackTranData($srvrConn,$srchUsrID,$srchTrckID) {
-$valX = "";
-$currIndx = 0;
-$txtTranArr = [];
+//$valX = "";
+//$currIndx = 0;
+//$txtTranArr = [];
 
 $trantrckArr = explode($GLOBALS['dlmtr1'],$GLOBALS['tranTrackCrdn']);
 
