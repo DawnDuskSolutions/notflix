@@ -11,12 +11,12 @@ CREATE TABLE `auditlog` (
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `audittran` (
-  `TranID` varchar(45) NOT NULL,
+  `TranID` varchar(50) NOT NULL,
   `UserAcctID` varchar(12) NOT NULL,
   `UserName` varchar(32) NOT NULL,
   `TrackID` varchar(12) NOT NULL,
   `UserAction` varchar(20) NOT NULL,
-  `InteractionPoint` varchar(30) NOT NULL,
+  `InteractionPoint` varchar(50) NOT NULL,
   `InteractionType` varchar(20) NOT NULL,
   PRIMARY KEY (`TranID`),
   UNIQUE KEY `TranLogDataTime_UNIQUE` (`TranID`)
@@ -73,8 +73,8 @@ CREATE TABLE `videotrack` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `trantrack` (
-  `UserAcctID` VARCHAR(50) NOT NULL, 
+  `UserAcctID` VARCHAR(20) NOT NULL, 
   `TranID` VARCHAR(50) NOT NULL, 
   `TranTrackID` VARCHAR(20) NOT NULL, 
-  `TranCurrTime` VARCHAR(20) NOt NULL
+  `TranCurrTime` VARCHAR(50) NOt NULL
 );
