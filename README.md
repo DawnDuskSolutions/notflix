@@ -2,7 +2,7 @@
 
 ### NotFlix
 
-** Version 1.0.0 **
+** Version 1.0 **
 
 ##  About / Synopsis
 
@@ -79,7 +79,7 @@ Instructios will guide to setup working environment for development and testing 
     curl http://<ipaddress>
     ```
 
-6.  http://<ipaddress> - will server the page in the browser. Login and view the video gallery and click the video, the video is ready for streaming.
+6.  Hit the page in the browser - http://yourhostaddress - Login and view the video gallery and click the video, the video is ready for streaming.
 
     Page looks like this,
 
